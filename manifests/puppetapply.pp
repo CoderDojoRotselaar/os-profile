@@ -18,7 +18,7 @@ class profile::puppetapply {
       ;
   }
 
-  service { 'puppet-apply':
+  service { 'puppet-apply.timer':
     enable => true,
   }
 }
