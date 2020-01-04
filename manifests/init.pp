@@ -3,14 +3,14 @@ class profile {
   include ::profile::systemd
 
   file {
-    '/usr/lib/systemd/system/puppet-agent.timer':
+    '/usr/lib/systemd/system/puppet-apply.timer':
       ensure  => present,
-      content => file('profile/puppet-agent.timer'),
+      content => file('profile/puppet-apply.timer'),
       notify  => Class['profile::systemd'],
       ;
-    '/usr/lib/systemd/system/puppet-agent.service':
+    '/usr/lib/systemd/system/puppet-apply.service':
       ensure  => present,
-      content => file('profile/puppet-agent.service'),
+      content => file('profile/puppet-apply.service'),
       notify  => Class['profile::systemd'],
       ;
   }
