@@ -1,0 +1,12 @@
+[Unit]
+Description=Executing Puppet Apply
+Wants=network-online.target
+After=network-online.target
+Wants=puppet-agent.timer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/puppet-apply
+
+[Install]
+WantedBy=multi-user.target
