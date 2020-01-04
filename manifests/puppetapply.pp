@@ -5,7 +5,7 @@ class profile::puppetapply {
       content => file('profile/puppet-apply.timer'),
       notify  => [
         Class['profile::systemd'],
-        Service['puppet-apply'],
+        Service['puppet-apply.timer'],
       ]
       ;
     '/lib/systemd/system/puppet-apply.service':
@@ -13,7 +13,7 @@ class profile::puppetapply {
       content => file('profile/puppet-apply.service'),
       notify  => [
         Class['profile::systemd'],
-        Service['puppet-apply'],
+        Service['puppet-apply.timer'],
       ]
       ;
   }
