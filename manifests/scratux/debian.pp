@@ -12,6 +12,6 @@ class profile::scratux::debian {
 
   package { 'scratux':
     ensure  => installed,
-    require => Apt::source['scratux'],
+    require => Apt::Source['scratux'],
   }
 }
