@@ -22,15 +22,20 @@ class profile::desktop::gnome_shell {
       ;
     '/etc/dconf/db/local.d/01-coderdojo':
       ensure  => present,
-      content => file('profile/01-coderdojo.dconf'),
+      content => file('profile/gnome_shell/01-coderdojo.dconf'),
       require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
       notify  => Exec['dconf update'],
+      ;
+    '/etc/dconf/profile/user':
+      ensure  => present,
+      content => file('profile/gnome_shell/user.conf'),
+      ;
   }
 
   if $profile::desktop::background {
     file {'/etc/dconf/db/local.d/10-gnome_shell':
       ensure  => present,
-      content => file('profile/gnome_shell.dconf'),
+      content => file('profile/gnome_shell/gnome_shell.dconf'),
       require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
       notify  => Exec['dconf update'],
     }
