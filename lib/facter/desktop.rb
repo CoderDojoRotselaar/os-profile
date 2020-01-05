@@ -28,10 +28,7 @@ Facter.add('gdm_custom_conf_file') do
       '/etc/gdm/custom.conf',
       '/etc/gdm3/custom.conf',
     ].find do |file|
-      if File.exist?(file)
-        return file
-      end
+      File.exist?(file)
     end
-    nil
   end
 end
