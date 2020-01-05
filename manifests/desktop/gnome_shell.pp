@@ -14,4 +14,9 @@ class profile::desktop::gnome_shell {
   }
 
   create_ini_settings($gnome_config, $gnome_defaults)
+
+  file { "/var/lib/AccountsService/icons/${coderdojo_user}":
+    ensure => file,
+    source => '/var/lib/coderdojo-deployment/assets/coderdojo_logo.png',
+  }
 }
