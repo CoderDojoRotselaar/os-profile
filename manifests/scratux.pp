@@ -8,4 +8,9 @@ class profile::scratux {
   package { 'scratux':
     ensure => installed,
   }
+
+  file { "${coderdojo_home}/Bureaublad/scratux.desktop":
+    ensure => link,
+    target => '/usr/share/applications/scratux.desktop',
+  }
 }
