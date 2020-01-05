@@ -25,4 +25,14 @@ class profile::desktop::lightdm {
     ensure => file,
     source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
   }
+
+  if $profile::desktop::background {
+    $background_path = '/usr/share/backgrounds/coderdojo/coderdojo_background.png'
+    $property_name = '/backdrop/screen0/monitor0/workspace0/last-image'
+    exec {'update background':
+      command => "/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name} --set ${background_path}",
+      unless  => "test $(/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name}) == '${background_path}'",
+      require => File[$background_path],
+    }
+  }
 }
