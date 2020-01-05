@@ -21,35 +21,14 @@ class profile::upgrade::redhat (
     },
   }
 
-  $dnf_automatic_override = {
-    'Timer' => {
-      'OnCalendar'         => '*-*-* *:00',
-      'RandomizedDelaySec' => '10m',
-    },
-  }
-
   package { 'dnf-automatic':
     ensure => present,
   }
 
-  file {
-    '/etc/dnf/automatic.conf':
-      ensure  => present,
-      content => hash2ini($upgrade_config, $unquoted_ini),
-      before  => Service['dnf-automatic.timer'],
-      ;
-    '/etc/systemd/system/dnf-automatic.timer.d/':
-      ensure  => directory,
-      mode    => '0755',
-      ;
-    '/etc/systemd/system/dnf-automatic.timer.d/override.conf':
-      ensure  => present,
-      content => hash2ini($dnf_automatic_override, $unquoted_ini),
-      notify  => [
-        Class['profile::systemd'],
-        Service['dnf-automatic.timer'],
-      ],
-      ;
+  file { '/etc/dnf/automatic.conf':
+    ensure  => present,
+    content => hash2ini($upgrade_config, $unquoted_ini),
+    before  => Service['dnf-automatic.timer'],
   }
 
   service { 'dnf-automatic.timer':
