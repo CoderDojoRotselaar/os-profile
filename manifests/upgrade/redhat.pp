@@ -39,14 +39,15 @@ class profile::upgrade::redhat (
     section => 'Timer',
     setting => 'OnUnitInactiveSec',
     value   => '1h',
+    notify  => [
+      Class['profile::systemd'],
+      Service['dnf-automatic.timer'],
+    ],
   }
 
   service { 'dnf-automatic.timer':
     ensure  => running,
     enable  => true,
-    require => [
-      Package['dnf-automatic'],
-      Ini_setting['dnf automatic timer setting'],
-    ],
+    require => Package['dnf-automatic'],
   }
 }
