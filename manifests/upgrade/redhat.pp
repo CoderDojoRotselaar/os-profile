@@ -24,7 +24,6 @@ class profile::upgrade::redhat (
   $upgrade_defaults = {
     path   => '/etc/dnf/automatic.conf',
     before => Service['dnf-automatic.timer'],
-    purge  => true,
   }
 
   create_ini_settings($upgrade_config, $upgrade_defaults)
