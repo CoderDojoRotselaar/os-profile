@@ -10,7 +10,7 @@ class profile::user (
     default  => [],
   }
 
-  group { $coderdojo_group
+  group { $coderdojo_group:
     ensure => present,
     gid    => 1000,
   }
