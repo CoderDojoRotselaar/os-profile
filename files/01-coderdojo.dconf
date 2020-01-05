@@ -1,0 +1,13 @@
+[org/gnome/desktop/background]
+picture-uri='file:///usr/share/backgrounds/coderdojo/coderdojo_background.png'
+picture-options='zoom'
+primary-color='000000'
+secondary-color='FFFFFF'
+
+[org/gnome/desktop/screensaver]
+color-shading-type='solid'
+lock-delay=uint32 15
+picture-options='zoom'
+picture-uri='file:///usr/share/backgrounds/coderdojo/coderdojo_background.png'
+primary-color='000000'
+secondary-color='FFFFFF'
