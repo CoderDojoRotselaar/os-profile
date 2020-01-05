@@ -1,4 +1,4 @@
-class profile::lightdm {
+class profile::desktop::lightdm {
   $coderdojo_user = $::profile::user::coderdojo_user
 
   exec { "migrate ${coderdojo_user} panels":
