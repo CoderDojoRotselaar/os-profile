@@ -5,12 +5,9 @@ class profile::scratux {
     default:  { } # do nothing
   }
 
-  package { 'scratux':
-    ensure => installed,
-  }
-
   file { "${coderdojo_home}/Bureaublad/scratux.desktop":
-    ensure => link,
-    target => '/usr/share/applications/scratux.desktop',
+    ensure  => link,
+    target  => '/usr/share/applications/scratux.desktop',
+    require => Package['scratux'],
   }
 }
