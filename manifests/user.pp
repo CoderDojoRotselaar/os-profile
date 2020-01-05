@@ -13,14 +13,26 @@ class profile::user (
   }
 
   user { 'coderdojo':
-    ensure   => present,
-    password => Sensitive($coderdojo_password),
-    home     => '/home/coderdojo',
-    uid      => 1000,
-    gid      => 1000,
-    groups   => $groups,
+    ensure         => present,
+    password       => Sensitive($coderdojo_password),
+    home           => '/home/coderdojo',
+    uid            => 1000,
+    gid            => 1000,
+    groups         => $groups,
+    membership     => 'minimum',
+    managehome     => true,
+    purge_ssh_keys => true,
   }
 
-
-
+  user { 'root':
+    ensure         => present,
+    password       => 'x',
+    home           => '/root',
+    uid            => 0,
+    gid            => 0,
+    groups         => ['root'],
+    membership     => 'inclusive',
+    managehome     => true,
+    purge_ssh_keys => true,
+  }
 }
