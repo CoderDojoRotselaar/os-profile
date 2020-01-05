@@ -1,0 +1,2 @@
+class profile::scratux::redhat {
+}
