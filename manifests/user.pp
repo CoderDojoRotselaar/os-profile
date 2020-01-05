@@ -29,6 +29,13 @@ class profile::user (
     purge_ssh_keys => true,
   }
 
+  exec { "update ${coderdojo_user} user-dirs":
+    command     => '/usr/bin/xdg-user-dirs-update --force',
+    refreshonly => true,
+    require     => User[$coderdojo_user],
+    user        => $coderdojo_user,
+  }
+
   user { 'root':
     ensure         => present,
     shell          => '/bin/bash',
