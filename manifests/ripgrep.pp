@@ -3,7 +3,7 @@ class profile::ripgrep (
 ) {
   $deb = "https://github.com/BurntSushi/ripgrep/releases/download/${version}/ripgrep_${version}_amd64.deb"
 
-  package { 'scratux':
+  package { 'ripgrep':
     provider => 'apt',
     ensure   => installed,
     source   => $deb,
