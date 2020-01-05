@@ -31,7 +31,7 @@ class profile::desktop::lightdm {
     $property_name = '/backdrop/screen0/monitor0/workspace0/last-image'
     exec {'update background':
       command => "/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name} --set ${background_path}",
-      unless  => "test $(/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name}) == '${background_path}'",
+      unless  => "/usr/bin/test $(/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name}) == '${background_path}'",
       require => File[$background_path],
     }
   }
