@@ -2,6 +2,10 @@ class profile::upgrade::redhat (
   Enum['default', 'security'] $upgrade_type = 'default',
   Enum['yes', 'no'] $apply_updates = 'yes',
 ) {
+  $unquoted_ini = {
+    'quote_char' => '',
+  }
+
   $upgrade_config = {
     'commands' => {
       'upgrade_type'     => $upgrade_type,
@@ -31,7 +35,7 @@ class profile::upgrade::redhat (
   file {
     '/etc/dnf/automatic.conf':
       ensure  => present,
-      content => hash2ini($upgrade_config),
+      content => hash2ini($upgrade_config, $unquoted_ini),
       before  => Service['dnf-automatic.timer'],
       ;
     '/etc/systemd/system/dnf-automatic.timer.d/':
@@ -40,7 +44,7 @@ class profile::upgrade::redhat (
       ;
     '/etc/systemd/system/dnf-automatic.timer.d/override.conf':
       ensure  => present,
-      content => hash2ini($dnf_automatic_override),
+      content => hash2ini($dnf_automatic_override, $unquoted_ini),
       notify  => [
         Class['profile::systemd'],
         Service['dnf-automatic.timer'],
