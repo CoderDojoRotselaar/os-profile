@@ -1,3 +1,5 @@
 class profile::time {
-  include ntp
+  class { 'ntp':
+    service_enable => true,
+  }
 }
