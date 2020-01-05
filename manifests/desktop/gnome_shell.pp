@@ -15,27 +15,28 @@ class profile::desktop::gnome_shell {
 
   create_ini_settings($gnome_config, $gnome_defaults)
 
-  file { "/var/lib/AccountsService/icons/${coderdojo_user}":
-    ensure => file,
-    source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
-  }
-
-  file { "/usr/share/backgrounds/coderdojo/coderdojo_background.png":
-    ensure => file,
-    source => '/var/lib/coderdojo-deploy/assets/coderdojo_background.png',
-  }
-
-  file { '/etc/dconf/db/local.d/10-gnome_shell':
-    ensure  => present,
-    content => file('profile/gnome_shell.dconf'),
-    notify  => Exec['dconf update'],
-  }
-
-  file { '/etc/dconf/db/local.d/01-coderdojo':
-    ensure  => present,
-    content => file('profile/01-coderdojo.dconf'),
-    require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
-    notify  => Exec['dconf update'],
+  file {
+    "/var/lib/AccountsService/icons/${coderdojo_user}":
+      ensure => file,
+      source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
+      ;
+    '/usr/share/backgrounds/coderdojo':
+      ensure => directory
+      ;
+    '/usr/share/backgrounds/coderdojo/coderdojo_background.png':
+      ensure => file,
+      source => '/var/lib/coderdojo-deploy/assets/coderdojo_background.png',
+      ;
+    '/etc/dconf/db/local.d/10-gnome_shell':
+      ensure  => present,
+      content => file('profile/gnome_shell.dconf'),
+      notify  => Exec['dconf update'],
+      ;
+    '/etc/dconf/db/local.d/01-coderdojo':
+      ensure  => present,
+      content => file('profile/01-coderdojo.dconf'),
+      require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
+      notify  => Exec['dconf update'],
   }
 
   exec { 'dconf update':
