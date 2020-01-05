@@ -20,7 +20,7 @@ class profile::desktop::gnome_shell {
     source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
   }
 
-  File { '/etc/dconf/db/local.d/10-gnome_shell',
+  File { '/etc/dconf/db/local.d/10-gnome_shell':
     ensure  => present,
     content => file('profile/gnome_shell.dconf',
   }
