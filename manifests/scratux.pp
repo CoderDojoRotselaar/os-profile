@@ -8,8 +8,10 @@ class profile::scratux {
   }
 
   file { "${coderdojo_home}/Bureaublad/scratux.desktop":
-    ensure  => link,
-    target  => '/usr/share/applications/scratux.desktop',
+    ensure  => file,
+    source  => '/usr/share/applications/scratux.desktop',
+    owner   => $::profile::user::coderdojo_user;
+    group   => $::profile::user::coderdojo_group;
     require => Package['scratux'],
   }
 }
