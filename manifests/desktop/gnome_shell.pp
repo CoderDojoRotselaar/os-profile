@@ -1,8 +1,8 @@
 class profile::desktop::gnome_shell {
   $gnome_config = {
     'daemon' => {
-      AutomaticLoginEnable => 'True',
-      AutomaticLogin       => 'username',
+      'AutomaticLoginEnable' => 'True',
+      'AutomaticLogin'       => 'username',
     }
   }
 
