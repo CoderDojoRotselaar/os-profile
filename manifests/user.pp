@@ -17,7 +17,7 @@ class profile::user (
 
   user { $coderdojo_user:
     ensure         => present,
-    command        => 'CoderDojo',
+    comment        => 'CoderDojo',
     password       => Sensitive($coderdojo_password),
     home           => $coderdojo_home,
     uid            => 1000,
