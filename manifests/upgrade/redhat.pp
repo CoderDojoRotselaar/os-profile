@@ -42,6 +42,7 @@ class profile::upgrade::redhat (
   }
 
   service { 'dnf-automatic.timer':
+    ensure  => running,
     enable  => true,
     require => [
       Package['dnf-automatic'],
