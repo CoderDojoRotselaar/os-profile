@@ -1,8 +1,10 @@
 class profile::desktop::gnome_shell {
+  $coderdojo_user = $::profile::user::coderdojo_user
+
   $gnome_config = {
     'daemon' => {
       'AutomaticLoginEnable' => 'True',
-      'AutomaticLogin'       => 'username',
+      'AutomaticLogin'       => $coderdojo_user,
     }
   }
 
