@@ -4,4 +4,5 @@ class profile {
   include ::profile::puppetapply
   include ::profile::user
   include ::profile::lightdm
+  include ::profile::scratux
 }
