@@ -6,4 +6,5 @@ class profile {
   include ::profile::user
   include ::profile::desktop
   include ::profile::scratux
+  include ::profile::upgrade
 }

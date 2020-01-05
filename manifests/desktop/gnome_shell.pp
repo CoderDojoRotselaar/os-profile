@@ -27,20 +27,22 @@ class profile::desktop::gnome_shell {
       require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
       notify  => Exec['dconf update'],
   }
+
   if $background {
-  file {
-    '/usr/share/backgrounds/coderdojo':
-      ensure => directory
-      ;
-    '/usr/share/backgrounds/coderdojo/coderdojo_background.png':
-      ensure => file,
-      source => "/var/lib/coderdojo-deploy/assets/${background}",
-      ;
-    '/etc/dconf/db/local.d/10-gnome_shell':
-      ensure  => present,
-      content => file('profile/gnome_shell.dconf'),
-      notify  => Exec['dconf update'],
-      ;
+    file {
+      '/usr/share/backgrounds/coderdojo':
+        ensure => directory
+        ;
+      '/usr/share/backgrounds/coderdojo/coderdojo_background.png':
+        ensure => file,
+        source => "/var/lib/coderdojo-deploy/assets/${background}",
+        ;
+      '/etc/dconf/db/local.d/10-gnome_shell':
+        ensure  => present,
+        content => file('profile/gnome_shell.dconf'),
+        notify  => Exec['dconf update'],
+        ;
+    }
   }
 
   exec { 'dconf update':
