@@ -20,4 +20,9 @@ class profile::desktop::lightdm {
   }
 
   create_ini_settings($lightdm_config, $lightdm_defaults)
+
+  file { "${::profile::user::coderdojo_home}/.face":
+    ensure => file,
+    source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
+  }
 }
