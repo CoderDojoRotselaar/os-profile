@@ -13,7 +13,7 @@ class profile::lightdm {
   }
 
   $lightdm_defaults = {
-    key_val_separator => ' = ',
+    key_val_separator => '=',
     path              => '/tmp/foo.ini'
   }
 
