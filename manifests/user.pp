@@ -32,7 +32,7 @@ class profile::user (
   exec { "update ${coderdojo_user} user-dirs":
     command     => '/usr/bin/xdg-user-dirs-update --force',
     refreshonly => true,
-    require     => User[$coderdojo_user],
+    subscribe   => User[$coderdojo_user],
     user        => $coderdojo_user,
   }
 
