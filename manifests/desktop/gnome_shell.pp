@@ -33,7 +33,7 @@ class profile::desktop::gnome_shell {
       'enable-hot-corners' => 'true',
     },
     'org/gnome/shell/extensions/custom-hot-corners' => {
-      'actions' => '[(0, true, true, 'toggleOverview', ''), (0, false, false, 'toggleOverview', '')]',
+      'actions' => "[(0, true, true, 'toggleOverview', ''), (0, false, false, 'toggleOverview', '')]",
     },
     'org/gnome/shell/extensions/unite'              => {
       'window-buttons-theme'='yaru',
