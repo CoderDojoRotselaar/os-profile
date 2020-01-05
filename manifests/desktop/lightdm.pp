@@ -30,8 +30,9 @@ class profile::desktop::lightdm {
     $background_path = '/usr/share/backgrounds/coderdojo/coderdojo_background.png'
     $property_name = '/backdrop/screen0/monitor0/workspace0/last-image'
     exec {'update background':
-      command => "/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name} --set ${background_path}",
-      unless  => "/usr/bin/test $(/usr/bin/xfconf-query --channel xfce4-desktop --property ${property_name}) == '${background_path}'",
+      path    => '/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+      command => "xfconf-query --channel xfce4-desktop --property '${property_name}' --set '${background_path}'",
+      unless  => "xfconf-query --channel xfce4-desktop --property '${property_name}' | grep -q '^${background_path}$'",
       require => File[$background_path],
     }
   }
