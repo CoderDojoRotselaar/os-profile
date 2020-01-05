@@ -16,6 +16,10 @@ class profile::puppetapply {
         Service['puppet-apply.service', 'puppet-apply.timer'],
       ]
       ;
+    '/usr/sbin/puppet-apply':
+      ensure => link,
+      target => '/var/lib/coderdojo-deploy/puppet-apply.sh',
+      ;
   }
 
   service {
