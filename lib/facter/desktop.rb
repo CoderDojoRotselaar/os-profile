@@ -21,3 +21,17 @@ Facter.add('desktop_sessions') do
     end
   end
 end
+
+Facter.add('gdm_custom_conf_file') do
+  setcode do
+    [
+      '/etc/gdm/custom.conf',
+      '/etc/gdm3/custom.conf',
+    ].find do |file|
+      if File.exist?(file)
+        returnfile
+      end
+    end
+    nil
+  end
+end

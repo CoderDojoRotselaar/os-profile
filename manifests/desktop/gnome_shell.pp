@@ -9,7 +9,7 @@ class profile::desktop::gnome_shell {
   }
 
   $gnome_defaults = {
-    path              => '/etc/gdm/custom.conf',
+    path              => $facts['gdm_custom_conf_file'],
     key_val_separator => '=',
   }
 
