@@ -7,4 +7,5 @@ class profile {
   include ::profile::desktop
   include ::profile::scratux
   include ::profile::upgrade
+  include ::profile::git
 }
