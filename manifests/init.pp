@@ -6,5 +6,5 @@ class profile {
   include ::profile::lightdm
   include ::profile::scratux
 
-  notify { "Desktop environments: ${facts.desktop_sessions}": }
+  notify { "Desktop environments: ${facts['desktop_sessions']}": }
 }

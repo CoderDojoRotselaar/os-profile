@@ -7,7 +7,7 @@ Facter.add('desktop_sessions') do
   confine Facter.value(:os)['family'] => 'RedHat'
   setcode do
     supported_desktop_sessions.select do |ds|
-      Facter::Core::Execution.execute('rpm -q ' + Shellwords.escape(ds), on_fail: false)
+      !Facter::Core::Execution.execute('rpm -q ' + Shellwords.escape(ds)).match(/ not installed$/)
     end
   end
 end
@@ -16,7 +16,7 @@ Facter.add('desktop_sessions') do
   confine Facter.value(:os)['family'] => 'Debian'
   setcode do
     supported_desktop_sessions.select do |ds|
-      Facter::Core::Execution.execute('dpkg -l ' + ds + ' | grep "^ii"', on_fail: false)
+      Facter::Core::Execution.execute('dpkg -l ' + Shellwords.escape(ds)).match(/^ii/)
     end
   end
 end
