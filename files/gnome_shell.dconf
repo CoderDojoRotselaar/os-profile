@@ -1,5 +1,5 @@
 [org/gnome/shell]
-enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'custom-hot-corners@janrunx.gmail.com', 'desktop-icons@csoriano', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'suspend-button@laserb', 'window-list@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'custom-hot-corners@janrunx.gmail.com', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'suspend-button@laserb', 'window-list@gnome-shell-extensions.gcampax.github.com']
 enable-hot-corners=true
 favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'scratux.desktop', 'org.gnome.Terminal.desktop']
 
@@ -22,11 +22,6 @@ transparency-mode='FIXED'
 running-indicator-style='DOTS'
 click-action='previews'
 scroll-action='cycle-windows'
-
-[org/gnome/shell/extensions/desktop-icons]
-icon-size='small'
-show-home=true
-show-trash=true
 
 [org/gnome/desktop/peripherals/touchpad]
 disable-while-typing=false
