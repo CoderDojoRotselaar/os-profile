@@ -5,4 +5,6 @@ class profile {
   include ::profile::user
   include ::profile::lightdm
   include ::profile::scratux
+
+  notify { "Desktop environments: ${facts.desktop_sessions}": }
 }
