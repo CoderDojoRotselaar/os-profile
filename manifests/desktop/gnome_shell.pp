@@ -70,5 +70,10 @@ class profile::desktop::gnome_shell {
     key_val_separator => '=',
   }
 
-  create_ini_settings($gnome_shell_config, $gnome_shell_defaults)
+  create_ini_settings($gnome_shell_config, $gnome_shell_defaults) ~> Exec['dconf update']
+
+  exec { 'dconf update':
+    command     => '/usr/bin/dconf update',
+    refreshonly => true,
+  }
 }
