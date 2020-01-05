@@ -3,4 +3,5 @@ class profile {
   include ::profile::systemd
   include ::profile::puppetapply
   include ::profile::user
+  include ::profile::lightdm
 }
