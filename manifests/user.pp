@@ -17,6 +17,7 @@ class profile::user (
 
   user { $coderdojo_user:
     ensure         => present,
+    shell          => '/bin/bash',
     comment        => 'CoderDojo',
     password       => Sensitive($coderdojo_password),
     home           => $coderdojo_home,
@@ -30,6 +31,7 @@ class profile::user (
 
   user { 'root':
     ensure         => present,
+    shell          => '/bin/bash',
     password       => 'x',
     home           => '/root',
     uid            => 0,
