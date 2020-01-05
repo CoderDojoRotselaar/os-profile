@@ -22,14 +22,15 @@ class profile::upgrade::redhat (
   }
 
   $upgrade_defaults = {
-    path => '/etc/dnf/automatic.conf',
+    path   => '/etc/dnf/automatic.conf',
+    before => Service['dnf-automatic.timer'],
   }
 
   create_ini_settings($upgrade_config, $upgrade_defaults)
 
   file { '/etc/systemd/system/dnf-automatic.timer.d/':
-    ensure => directory,
-    mode   => '0755',
+    ensure  => directory,
+    mode    => '0755',
   }
 
   ini_setting { 'dnf automatic timer setting':
@@ -38,5 +39,13 @@ class profile::upgrade::redhat (
     section => 'Timer',
     setting => 'OnUnitInactiveSec',
     value   => '8h',
+  }
+
+  service { 'dnf-automatic.timer':
+    enable  => true,
+    require => [
+      Package['dnf-automatic'],
+      Ini_setting['dnf automatic timer setting'],
+    ],
   }
 }
