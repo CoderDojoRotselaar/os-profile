@@ -8,5 +8,6 @@ class profile::scratux::debian {
       'id'     => '8756C4F765C9AC3CB6B85D62379CE192D401AB61',
       'server' => 'keyserver.ubuntu.com',
     },
+    before   => Package['scratux'],
   }
 }

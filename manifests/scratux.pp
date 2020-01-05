@@ -4,4 +4,8 @@ class profile::scratux {
     'Debian': { include profile::scratux::debian  }
     default:  { } # do nothing
   }
+
+  package { 'scratux':
+    ensure => installed,
+  }
 }
