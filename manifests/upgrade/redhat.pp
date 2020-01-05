@@ -38,7 +38,7 @@ class profile::upgrade::redhat (
     path    => '/etc/systemd/system/dnf-automatic.timer.d/override.conf',
     section => 'Timer',
     setting => 'OnUnitInactiveSec',
-    value   => '8h',
+    value   => '1h',
   }
 
   service { 'dnf-automatic.timer':
