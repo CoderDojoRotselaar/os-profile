@@ -22,14 +22,7 @@ class profile::desktop::gnome_shell {
 
   $gnome_shell_config = {
     'org/gnome/shell'                               => {
-      'enabled-extensions' => [
-        'dash-to-dock@micxgx.gmail.com',
-        'custom-hot-corners@janrunx.gmail.com',
-        'desktop-icons@csoriano',
-        'places-menu@gnome-shell-extensions.gcampax.github.com',
-        'apps-menu@gnome-shell-extensions.gcampax.github.com',
-        'suspend-button@laserb'
-      ],
+      'enabled-extensions' => "['dash-to-dock@micxgx.gmail.com', 'custom-hot-corners@janrunx.gmail.com', 'desktop-icons@csoriano', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'suspend-button@laserb']",
       'enable-hot-corners' => 'true',
     },
     'org/gnome/shell/extensions/custom-hot-corners' => {
