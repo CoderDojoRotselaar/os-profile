@@ -22,7 +22,7 @@ class profile::desktop::gnome_shell {
 
   file { '/etc/dconf/db/local.d/10-gnome_shell':
     ensure  => present,
-    content => file('profile/gnome_shell.dconf',
+    content => file('profile/gnome_shell.dconf'),
     notify  => Exec['dconf update'],
   }
 
