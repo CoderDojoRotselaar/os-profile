@@ -5,7 +5,7 @@ class profile::scratux::debian {
     location => 'https://dl.bintray.com/scratux/stable',
     repos    => 'bionic main',
     key      => {
-      'id'     => '379CE192D401AB61',
+      'id'     => '8756C4F765C9AC3CB6B85D62379CE192D401AB61',
       'server' => 'keyserver.ubuntu.com',
     },
   }
