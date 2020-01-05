@@ -1,4 +1,6 @@
-class profile::desktop {
+class profile::desktop (
+  Optional[String] $background = undef,
+) {
   notify { "Desktop environments: ${facts['desktop_sessions']}": }
   $ds_classes = $facts['desktop_sessions'].map |String $ds| {
     $sanitized_ds = regsubst($ds, /[^[:alnum:]+]/, '_', 'G')
