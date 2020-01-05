@@ -1,6 +1,7 @@
 [org/gnome/shell]
 enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'custom-hot-corners@janrunx.gmail.com', 'desktop-icons@csoriano', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'suspend-button@laserb', 'window-list@gnome-shell-extensions.gcampax.github.com']
 enable-hot-corners=true
+favorite-apps=['firefox.desktop', 'rhythmbox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'scratux.desktop']
 
 [org/gnome/shell/extensions/custom-hot-corners]
 actions=[(0, true, true, 'toggleOverview', ''), (0, false, false, 'toggleOverview', '')]
