@@ -19,7 +19,7 @@ class profile::upgrade::redhat (
 
   $dnf_automatic_override = {
     'Timer' => {
-      'Calendar'           => '*-*-* *:00',
+      'OnCalendar'         => '*-*-* *:00',
       'RandomizedDelaySec' => '10m',
     },
   }
