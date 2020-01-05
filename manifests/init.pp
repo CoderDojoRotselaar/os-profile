@@ -3,8 +3,6 @@ class profile {
   include ::profile::systemd
   include ::profile::puppetapply
   include ::profile::user
-  include ::profile::lightdm
+  include ::profile::desktop
   include ::profile::scratux
-
-  notify { "Desktop environments: ${facts['desktop_sessions']}": }
 }
