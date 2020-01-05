@@ -8,7 +8,7 @@ class profile::lightdm {
   }
 
   $lightdm_defaults = {
-    path              => '/etc/lightdm/lightdm.conf.d/autologin.conf',
+    path              => '/etc/lightdm/lightdm.conf',
     key_val_separator => '=',
   }
 
