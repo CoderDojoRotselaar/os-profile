@@ -26,3 +26,7 @@ scroll-action='cycle-windows'
 icon-size='small'
 show-home=true
 show-trash=true
+
+[org/gnome/desktop/peripherals/touchpad]
+disable-while-typing=false
+two-finger-scrolling-enabled=true
