@@ -1,12 +1,16 @@
-class profile::git {
+class profile::git (
+  Optional[String] $repository = undef,
+) {
   $coderdojo_home = $::profile::user::coderdojo_home
   $coderdojo_user = $::profile::user::coderdojo_user
 
-  vcsrepo { "${coderdojo_home}/coderdojo-projecten":
-    user               => $coderdojo_user,
-    ensure             => present,
-    provider           => git,
-    source             => 'https://github.com/CoderDojoRotselaar/projecten.git',
-    keep_local_changes => true,
+  if $repository {
+    vcsrepo { "${coderdojo_home}/coderdojo-projecten":
+      ensure             => present,
+      user               => $coderdojo_user,
+      provider           => git,
+      source             => $repository,
+      keep_local_changes => true,
+    }
   }
 }

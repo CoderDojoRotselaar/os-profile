@@ -1,7 +1,7 @@
 class profile::user (
-  String $coderdojo_user               = 'coderdojo',
+  String $coderdojo_user,
+  String $coderdojo_password,
   String $coderdojo_group              = $coderdojo_user,
-  String $coderdojo_password           = '$6$XTj1xyhI$Ku8xdtmejyS0h/1wBIcLt8LBPoV2n7UBzKM7cCrQyd3CEyd.NeRrldfL05SHaQVGkgSopvDVt8fRX/6mbzuPL/',
   Stdlib::AbsolutePath $coderdojo_home = "/home/${coderdojo_user}",
 ) {
   $groups = $facts['os']['family'] ? {
