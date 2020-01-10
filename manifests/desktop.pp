@@ -10,7 +10,7 @@ class profile::desktop (
         ;
       '/usr/share/backgrounds/coderdojo/coderdojo_background.png':
         ensure => file,
-        source => "/var/lib/coderdojo-deploy/assets/${background}",
+        source => "/var/lib/puppet-deployment/assets/${background}",
         ;
     }
   }

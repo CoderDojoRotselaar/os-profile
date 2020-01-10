@@ -18,7 +18,7 @@ class profile::puppetapply {
       ;
     '/usr/sbin/puppet-apply':
       ensure => link,
-      target => '/var/lib/coderdojo-deploy/puppet-apply.sh',
+      target => '/var/lib/puppet-deployment/puppet-apply.sh',
       ;
   }
 

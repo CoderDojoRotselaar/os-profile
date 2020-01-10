@@ -23,7 +23,7 @@ class profile::desktop::lightdm {
 
   file { "${::profile::user::coderdojo_home}/.face":
     ensure => file,
-    source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
+    source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',
   }
 
   if $profile::desktop::background {

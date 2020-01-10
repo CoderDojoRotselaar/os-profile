@@ -18,7 +18,7 @@ class profile::desktop::gnome_shell {
   file {
     "/var/lib/AccountsService/icons/${coderdojo_user}":
       ensure => file,
-      source => '/var/lib/coderdojo-deploy/assets/coderdojo_logo.png',
+      source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',
       ;
     '/etc/dconf/db/local.d/01-coderdojo':
       ensure  => present,
