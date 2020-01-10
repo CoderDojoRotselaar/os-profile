@@ -1,12 +1,12 @@
 [Unit]
-Description=Run Puppet Apply every 45-60 minutes
+Description=Run Puppet Apply every 4 hours
 Requires=puppet-apply.service
 
 [Timer]
 Unit=puppet-apply.service
-OnUnitInactiveSec=45m
-RandomizedDelaySec=15m
-AccuracySec=1s
+OnUnitInactiveSec=4h
+RandomizedDelaySec=30m
+Persistent=true
 
 [Install]
 WantedBy=timers.target
