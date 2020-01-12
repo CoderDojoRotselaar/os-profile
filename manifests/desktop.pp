@@ -17,6 +17,9 @@ class profile::desktop (
 
   if $background {
     file {
+      '/usr/share/backgrounds':
+        ensure => directory
+        ;
       '/usr/share/backgrounds/coderdojo':
         ensure => directory
         ;
