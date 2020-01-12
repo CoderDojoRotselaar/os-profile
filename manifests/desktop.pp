@@ -27,6 +27,12 @@ class profile::desktop (
     }
   }
 
+  file { "${::profile::user::coderdojo_home}/Bureaublad":
+    ensure => directory,
+    owner  => $::profile::user::coderdojo_user,
+    group  => $::profile::user::coderdojo_group,
+  }
+
   $ds_classes = $facts['desktop_sessions'].map |String $ds| {
     $sanitized_ds = regsubst($ds, /[^[:alnum:]+]/, '_', 'G')
     "profile::desktop::${sanitized_ds}"
