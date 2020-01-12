@@ -31,17 +31,6 @@ class profile::user (
     purge_ssh_keys => true,
   }
 
-  exec { "update ${coderdojo_user} user-dirs":
-    command     => '/usr/bin/xdg-user-dirs-update --force',
-    refreshonly => true,
-    subscribe   => [
-      User[$coderdojo_user],
-      File["${coderdojo_home}/.config/user-dirs.locale"],
-    ],
-    before      => File["${::profile::user::coderdojo_home}/Bureaublad"],
-    user        => $coderdojo_user,
-  }
-
   user { 'root':
     ensure         => present,
     shell          => '/bin/bash',
@@ -64,5 +53,14 @@ class profile::user (
     owner   => $coderdojo_user,
     group   => $coderdojo_group,
     content => $::profile::locale::lang,
+  }
+
+  exec { "update ${coderdojo_user} user-dirs":
+    env         => "LC_ALL=${::profile::locale::lang}",
+    command     => '/usr/bin/xdg-user-dirs-update --force',
+    refreshonly => true,
+    subscribe   => File["${coderdojo_home}/.config/user-dirs.locale"],
+    before      => File["${::profile::user::coderdojo_home}/Bureaublad"],
+    user        => $coderdojo_user,
   }
 }
