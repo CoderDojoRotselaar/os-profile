@@ -2,7 +2,7 @@ class profile::desktop (
   Optional[String] $background = undef,
   Optional[String] $environment = undef,
 ) {
-  $installed_des = facts['desktop_sessions']
+  $installed_des = $facts['desktop_sessions']
   notify { "Currently installed desktop environments: ${installed_des}": }
 
   if empty($installed_des) {
