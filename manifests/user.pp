@@ -4,6 +4,8 @@ class profile::user (
   String $coderdojo_group              = $coderdojo_user,
   Stdlib::AbsolutePath $coderdojo_home = "/home/${coderdojo_user}",
 ) {
+  require ::profile::locale
+
   $groups = $facts['os']['family'] ? {
     'Debian' => ['adm', 'cdrom', 'sudo', 'dip', 'plugdev', 'lpadmin', 'sambashare'],
     'RedHat' => ['wheel'],
@@ -51,5 +53,12 @@ class profile::user (
 
   file { "${coderdojo_home}/.config/autostart/lite-welcome.desktop":
     ensure => absent,
+  }
+
+  file { "${coderdojo_home}/.config/user-dirs.locale":
+    ensure  => file,
+    owner   => $coderdojo_user,
+    group   => $coderdojo_group,
+    content => $::profile::locale::lang,
   }
 }
