@@ -56,7 +56,7 @@ class profile::user (
   }
 
   exec { "update ${coderdojo_user} user-dirs":
-    env         => "LC_ALL=${::profile::locale::lang}",
+    environment => "LC_ALL=${::profile::locale::lang}",
     command     => '/usr/bin/xdg-user-dirs-update --force',
     refreshonly => true,
     subscribe   => File["${coderdojo_home}/.config/user-dirs.locale"],
