@@ -8,4 +8,6 @@ class profile {
   include ::profile::scratux
   include ::profile::upgrade
   include ::profile::git
+  include ::profile::keyboard
+  include ::profile::locale
 }
