@@ -1,5 +1,7 @@
 class profile {
   include ::profile::time
+  include ::profile::keyboard
+  include ::profile::locale
   include ::profile::packages
   include ::profile::systemd
   include ::profile::puppetapply
@@ -8,6 +10,4 @@ class profile {
   include ::profile::scratux
   include ::profile::upgrade
   include ::profile::git
-  include ::profile::keyboard
-  include ::profile::locale
 }
