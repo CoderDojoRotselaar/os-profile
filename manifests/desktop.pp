@@ -5,7 +5,7 @@ class profile::desktop (
   notify { "Desktop environments: ${facts['desktop_sessions']}": }
 
   case $environment {
-    'lubuntu-desktop': { include ::profile::destkop::lubuntu }
+    'lubuntu-desktop': { include ::profile::desktop::lubuntu }
     undef : { } # Nothing to do
     default: { fail("Unsupported environment requested: '${environment}'") }
   }
