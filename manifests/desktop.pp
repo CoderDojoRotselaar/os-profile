@@ -2,6 +2,8 @@ class profile::desktop (
   Optional[String] $background = undef,
   Optional[String] $environment = undef,
 ) {
+  require ::profile::user
+
   $installed_des = $facts['desktop_sessions']
   notify { "Currently installed desktop environments: ${installed_des}": }
 
@@ -27,7 +29,10 @@ class profile::desktop (
     }
   }
 
-  file { "${::profile::user::coderdojo_home}/Bureaublad":
+  file { [
+    "${::profile::user::coderdojo_home}/.config",
+    "${::profile::user::coderdojo_home}/Bureaublad"
+  ]:
     ensure => directory,
     owner  => $::profile::user::coderdojo_user,
     group  => $::profile::user::coderdojo_group,
