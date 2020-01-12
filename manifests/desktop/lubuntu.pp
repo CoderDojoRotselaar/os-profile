@@ -1,4 +1,4 @@
-profile profile::desktop::lubuntu {
+class profile::desktop::lubuntu {
   package { 'lubuntu-desktop':
     ensure => installed,
   }
