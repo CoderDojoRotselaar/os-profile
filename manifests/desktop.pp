@@ -2,12 +2,17 @@ class profile::desktop (
   Optional[String] $background = undef,
   Optional[String] $environment = undef,
 ) {
-  notify { "Desktop environments: ${facts['desktop_sessions']}": }
+  $installed_des = facts['desktop_sessions']
+  notify { "Currently installed desktop environments: ${installed_des}": }
 
-  case $environment {
-    'lubuntu-desktop': { include ::profile::desktop::lubuntu }
-    undef : { } # Nothing to do
-    default: { fail("Unsupported environment requested: '${environment}'") }
+  if empty($installed_des) {
+    notify { "Installing default DE for this host: '${environment}'": }
+
+    case $environment {
+      'lubuntu-desktop': { include ::profile::desktop::lubuntu }
+      undef:             { } # Nothing to do
+      default:           { fail("Unsupported environment requested: '$ { environment}'") }
+    }
   }
 
   if $background {
