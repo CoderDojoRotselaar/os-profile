@@ -34,7 +34,11 @@ class profile::user (
   exec { "update ${coderdojo_user} user-dirs":
     command     => '/usr/bin/xdg-user-dirs-update --force',
     refreshonly => true,
-    subscribe   => User[$coderdojo_user],
+    subscribe   => [
+      User[$coderdojo_user],
+      File["${coderdojo_home}/.config/user-dirs.locale"],
+    ],
+    before      => File["${::profile::user::coderdojo_home}/Bureaublad"],
     user        => $coderdojo_user,
   }
 
