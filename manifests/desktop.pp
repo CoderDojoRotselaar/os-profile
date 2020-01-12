@@ -1,7 +1,14 @@
 class profile::desktop (
   Optional[String] $background = undef,
+  Optional[String] $environment = undef,
 ) {
   notify { "Desktop environments: ${facts['desktop_sessions']}": }
+
+  case $environment {
+    'lubuntu-desktop': { include ::profile::destkop::lubuntu }
+    undef : { } # Nothing to do
+    default: { fail("Unsupported environment requested: '${environment}'") }
+  }
 
   if $background {
     file {
