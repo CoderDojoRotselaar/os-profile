@@ -26,6 +26,11 @@ class profile::desktop::lightdm {
     source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',
   }
 
+  file { '/etc/apt/apt.conf.d/99update-notifier':
+    ensure  => file,
+    content => '',
+  }
+
   if $profile::desktop::background and !defined(Package['lubuntu-desktop']) {
     $background_path = '/usr/share/backgrounds/coderdojo/coderdojo_background.png'
     $property_name = '/backdrop/screen0/monitor0/workspace0/last-image'
