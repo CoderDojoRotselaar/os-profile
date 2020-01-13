@@ -2,6 +2,8 @@ class profile::desktop (
   Optional[String] $background = undef,
   Optional[String] $environment = undef,
 ) {
+  require ::profile::disks
+
   $installed_des = $facts['desktop_sessions']
   notify { "Currently installed desktop environments: ${installed_des}": }
 
