@@ -16,7 +16,7 @@ class profile::desktop::lubuntu_desktop {
 
   file { "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panes/panel":
     ensure  => file,
-    content => file('profile/lubuntu/panel.conf'),
+    content => file('profile/lubuntu_desktop/panel.conf'),
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
   }
