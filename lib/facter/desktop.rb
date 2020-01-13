@@ -1,6 +1,7 @@
 require 'shellwords'
 
 supported_desktop_sessions = [
+  'lubuntu-desktop',
   'gnome-shell',
   'lightdm',
 ]
