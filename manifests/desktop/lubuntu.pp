@@ -7,9 +7,9 @@ class profile::desktop::lubuntu {
   }
 
   file { [
-    "${::profile::user::coderdojo_home}/.config/lxpanel"
-    "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu"
-    "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panes"
+    "${::profile::user::coderdojo_home}/.config/lxpanel",
+    "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu",
+    "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panes",
     ]:
       ensure => directory,
       owner  => $::profile::user::coderdojo_user,
