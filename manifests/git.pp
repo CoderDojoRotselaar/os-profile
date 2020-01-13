@@ -23,6 +23,7 @@ class profile::git (
       provider           => git,
       source             => $repository,
       keep_local_changes => true,
+      require            => File['/var/lib/coderdojo'],
     }
   }
 
