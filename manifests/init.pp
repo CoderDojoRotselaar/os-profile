@@ -13,4 +13,6 @@ class profile {
   include ::profile::firefox
   include ::profile::upgrade
   include ::profile::git
+  include ::profile::ruby
+  include ::profile::python
 }
