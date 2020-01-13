@@ -1,7 +1,7 @@
-class profile::vscodium::debian {
+class profile::codium::debian {
   include apt
 
-  apt::source { 'vscodium':
+  apt::source { 'codium':
     location => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/',
     release  => 'vscodium',
     repos    => 'main',
@@ -11,9 +11,9 @@ class profile::vscodium::debian {
     },
   }
 
-  package { 'vscodium':
+  package { 'codium':
     ensure  => installed,
     name    => 'codium',
-    require => Apt::Source['vscodium'],
+    require => Apt::Source['codium'],
   }
 }

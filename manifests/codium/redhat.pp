@@ -1,6 +1,6 @@
-class profile::vscodium::redhat {
+class profile::codium::redhat {
 
-  yumrepo { 'vscodium':
+  yumrepo { 'codium':
     descr         => 'Visual Studio Code',
     enabled       => 1,
     baseurl       => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/rpms/',
@@ -9,15 +9,15 @@ class profile::vscodium::redhat {
     gpgkey        => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
   }
 
-  exec { 'import vscodium gpg key':
+  exec { 'import codium gpg key':
     command     => '/usr/bin/rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg',
-    subscribe   => Yumrepo[vscodium],
+    subscribe   => Yumrepo[codium],
     refreshonly => true,
   }
 
-  package { 'vscodium':
+  package { 'codium':
     ensure  => installed,
     name    => 'codium',
-    require => Yumrepo['vscodium'],
+    require => Yumrepo['codium'],
   }
 }
