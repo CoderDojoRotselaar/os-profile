@@ -1,5 +1,5 @@
 class profile::disks (
-  String $rootvg = 'vgcoderdojo',
+  String $rootvg = 'coderdojo-vg',
 ) {
   class { 'lvm':
     volume_groups => {
