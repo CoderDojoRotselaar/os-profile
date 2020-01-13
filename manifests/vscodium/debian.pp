@@ -13,6 +13,7 @@ class profile::vscodium::debian {
 
   package { 'vscodium':
     ensure  => installed,
+    name    => 'codium',
     require => Apt::Source['vscodium'],
   }
 }

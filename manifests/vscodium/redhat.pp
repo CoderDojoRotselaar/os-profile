@@ -17,6 +17,7 @@ class profile::vscodium::redhat {
 
   package { 'vscodium':
     ensure  => installed,
+    name    => 'codium',
     require => Yumrepo['vscodium'],
   }
 }
