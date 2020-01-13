@@ -5,12 +5,12 @@ class profile::python (
   package { ['python-pip', 'python3-pip']:
     ensure => installed,
   }
-  package { $pips
+  package { $pips:
     ensure   => installed,
     provider => 'pip',
     require  => Package['python-pip'],
   }
-  package { $pip3s
+  package { $pip3s:
     ensure   => installed,
     provider => 'pip3',
     require  => Package['python3-pip'],
