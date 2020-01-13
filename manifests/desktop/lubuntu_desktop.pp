@@ -30,6 +30,9 @@ class profile::desktop::lubuntu_desktop {
   file { [
     "${::profile::user::coderdojo_home}/.config/pcmanfm",
     "${::profile::user::coderdojo_home}/.config/pcmanfm/lubuntu",
+    "${::profile::user::coderdojo_home}/.config/lxpanel",
+    "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu",
+    "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panels",
   ]:
     ensure => directory,
     owner  => $::profile::user::coderdojo_user,
@@ -41,5 +44,19 @@ class profile::desktop::lubuntu_desktop {
     content => hash2ini($desktop_config, $unquoted_ini),
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
+  }
+
+  file { "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panels/panel":
+    ensure  => present,
+    content => file('profile/lubuntu_desktop/panels.conf'),
+    owner   => $::profile::user::coderdojo_user,
+    group   => $::profile::user::coderdojo_group,
+    notify  => Exec['Restart lxpanel'],
+  }
+
+  exec { 'Restart lxpanel':
+    command     => '/usr/bin/lxpanelctl restart',
+    user        => $::profile::user::coderdojo_user,
+    refreshonly => true
   }
 }
