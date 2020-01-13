@@ -1,6 +1,8 @@
 class profile::disks (
   String $rootvg = 'coderdojo',
 ) {
+  include ::profile::user
+
   class { 'lvm':
     volume_groups => {
       $rootvg => {
