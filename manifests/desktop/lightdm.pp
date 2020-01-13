@@ -26,7 +26,7 @@ class profile::desktop::lightdm {
     source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',
   }
 
-  if $profile::desktop::background {
+  if $profile::desktop::background and !defined(Package['lubuntu-desktop']) {
     $background_path = '/usr/share/backgrounds/coderdojo/coderdojo_background.png'
     $property_name = '/backdrop/screen0/monitor0/workspace0/last-image'
     exec {'update background':
