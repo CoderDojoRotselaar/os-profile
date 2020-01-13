@@ -1,4 +1,5 @@
 class profile {
+  include ::profile::disks
   include ::profile::time
   include ::profile::keyboard
   include ::profile::locale
