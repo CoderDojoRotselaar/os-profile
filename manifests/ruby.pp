@@ -2,7 +2,7 @@ class profile::ruby (
   Array[String] $gems = [],
 ) {
   package { 'ruby':
-    ensures => installed,
+    ensure => installed,
   }
 
   package { $gems:
