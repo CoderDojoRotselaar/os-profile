@@ -3,7 +3,8 @@ class profile::scratux::debian {
 
   apt::source { 'scratux':
     location => 'https://dl.bintray.com/scratux/stable',
-    repos    => 'bionic main',
+    release  => 'bionic',
+    repos    => 'main',
     key      => {
       'id'     => '8756C4F765C9AC3CB6B85D62379CE192D401AB61',
       'server' => 'keyserver.ubuntu.com',
