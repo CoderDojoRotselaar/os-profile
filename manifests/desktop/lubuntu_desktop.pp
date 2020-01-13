@@ -1,6 +1,4 @@
 class profile::desktop::lubuntu_desktop {
-  $background = $::profile::desktop::background
-
   package { 'lubuntu-desktop':
     ensure => installed,
     before => User[$::profile::user::coderdojo_user],
@@ -18,12 +16,8 @@ class profile::desktop::lubuntu_desktop {
 
   file { "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panes/panel":
     ensure  => file,
-    content => template('profile/lubuntu/panel.conf.erb'),
+    content => file('profile/lubuntu/panel.conf'),
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
-  }
-
-  service { 'lightdm':
-    enable => true,
   }
 }
