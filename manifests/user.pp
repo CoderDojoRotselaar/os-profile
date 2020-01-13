@@ -5,6 +5,7 @@ class profile::user (
   Stdlib::AbsolutePath $coderdojo_home = "/home/${coderdojo_user}",
 ) {
   require ::profile::locale
+  include ::sudo
 
   $groups = $facts['os']['family'] ? {
     'Debian' => ['adm', 'cdrom', 'sudo', 'dip', 'plugdev', 'lpadmin', 'sambashare'],
@@ -29,6 +30,10 @@ class profile::user (
     membership     => 'minimum',
     managehome     => true,
     purge_ssh_keys => true,
+  }
+
+  sudo::conf { "user_${coderdojo_user}":
+    content  => "${coderdojo_user} ALL=(ALL) ALL",
   }
 
   user { 'root':
