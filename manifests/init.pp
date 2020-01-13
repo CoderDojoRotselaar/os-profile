@@ -9,6 +9,7 @@ class profile {
   include ::profile::user
   include ::profile::desktop
   include ::profile::scratux
+  include ::profile::firefox
   include ::profile::upgrade
   include ::profile::git
 }
