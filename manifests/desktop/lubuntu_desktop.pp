@@ -62,7 +62,7 @@ class profile::desktop::lubuntu_desktop {
   }
 
   exec { 'Set wallpaper':
-    command     => 'pcmanfm --set-wallpaper=/usr/share/backgrounds/coderdojo/coderdojo_background.png',
+    command     => '/usr/bin/pcmanfm --set-wallpaper=/usr/share/backgrounds/coderdojo/coderdojo_background.png',
     user        => $::profile::user::coderdojo_user,
     refreshonly => true,
   }
