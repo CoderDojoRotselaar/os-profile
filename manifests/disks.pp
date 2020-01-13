@@ -11,15 +11,15 @@ class profile::disks (
             'size_is_minsize' => true,
           },
           'tmp'    => {
-            'size'            => '5G' ,
+            'size'            => '2G' ,
             'size_is_minsize' => true,
           },
           'var'    => {
-            'size'            => '5G',
+            'size'            => '3G',
             'size_is_minsize' => true,
           },
           'home'   => {
-            'size'            => '20G' ,
+            'size'            => '10G' ,
             'size_is_minsize' => true,
           },
           'swap_1' => {
