@@ -11,6 +11,7 @@ class profile::disks (
           'root'   => {
             'size'            => '10G',
             'size_is_minsize' => true,
+            'mountpath'       => '/',
           },
           'tmp'    => {
             'size'            => '2G',
