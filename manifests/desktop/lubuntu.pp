@@ -24,6 +24,6 @@ class profile::desktop::lubuntu {
   }
 
   service { 'lightdm':
-    ensure => enabled,
+    enable => true,
   }
 }
