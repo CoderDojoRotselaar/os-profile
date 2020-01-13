@@ -5,7 +5,7 @@ class profile::git (
   $coderdojo_user = $::profile::user::coderdojo_user
 
   if $repository {
-    vcsrepo { "${coderdojo_home}/coderdojo-projecten":
+    vcsrepo { '/var/lib/coderdojo-projects':
       ensure             => present,
       user               => $coderdojo_user,
       provider           => git,
