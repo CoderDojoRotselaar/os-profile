@@ -1,4 +1,4 @@
-class profile::desktop::lubuntu {
+class profile::desktop::lubuntu_desktop {
   $background = $::profile::desktop::background
 
   package { 'lubuntu-desktop':

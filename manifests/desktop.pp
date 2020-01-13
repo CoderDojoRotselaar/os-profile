@@ -11,7 +11,7 @@ class profile::desktop (
     notify { "Installing default DE for this host: '${environment}'": }
 
     case $environment {
-      'lubuntu-desktop': { include ::profile::desktop::lubuntu }
+      'lubuntu-desktop': { include ::profile::desktop::lubuntu_desktop }
       undef:             { } # Nothing to do
       default:           { fail("Unsupported environment requested: '$ { environment}'") }
     }
