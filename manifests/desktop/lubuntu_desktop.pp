@@ -23,7 +23,7 @@ class profile::desktop::lubuntu_desktop {
       'sort'                  => 'mtime;ascending;',
       'show_documents'        => 1,
       'show_trash'            => 1,
-      'show_mounts'           => 0,
+      'show_mounts'           => 1,
     },
   }
 
