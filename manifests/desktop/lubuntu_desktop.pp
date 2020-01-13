@@ -44,6 +44,7 @@ class profile::desktop::lubuntu_desktop {
     content => hash2ini($desktop_config, $unquoted_ini),
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
+    notify  => Exec['Set wallpaper'],
   }
 
   file { "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panels/panel":
@@ -57,6 +58,12 @@ class profile::desktop::lubuntu_desktop {
   exec { 'Restart lxpanel':
     command     => '/usr/bin/lxpanelctl restart',
     user        => $::profile::user::coderdojo_user,
-    refreshonly => true
+    refreshonly => true,
+  }
+
+  exec { 'Set wallpaper':
+    command     => 'pcmanfm --set-wallpaper=/usr/share/backgrounds/coderdojo/coderdojo_background.png',
+    user        => $::profile::user::coderdojo_user,
+    refreshonly => true,
   }
 }
