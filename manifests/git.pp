@@ -13,4 +13,14 @@ class profile::git (
       keep_local_changes => true,
     }
   }
+
+  file { '/usr/local/sync-git':
+    ensure => directory,
+  }
+
+  file { '/usr/local/sync-git/sync-git':
+    ensure  => present,
+    content => file('profile/sync-git/sync-git.sh'),
+    mode    => '0755',
+  }
 }
