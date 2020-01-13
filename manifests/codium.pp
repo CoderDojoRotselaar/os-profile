@@ -1,4 +1,6 @@
-class profile::codium {
+class profile::codium (
+  Array[String] $extensions = [],
+) {
   $coderdojo_home = $::profile::user::coderdojo_home
 
   case $facts['os']['family'] {
@@ -14,5 +16,14 @@ class profile::codium {
     group   => $::profile::user::coderdojo_group,
     mode    => '0755',
     require => Package['codium'],
+  }
+
+  $extensions.each |$ext| {
+    exec { "Install codium extension '${ext}'":
+      command => "/usr/bin/codium --install ${ext}",
+      unless  => "/usr/bin/codium --list-extensions | grep -Fx ${ext}",
+      user    => $::profile::user::coderdojo_user,
+      require => Package['codium'],
+    }
   }
 }
