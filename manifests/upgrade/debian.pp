@@ -3,4 +3,8 @@ class profile::upgrade::debian {
     enable       => 1,
     random_sleep => 600,
   }
+
+  file { '/etc/apt/apt.conf':
+    ensure  => absent,
+  }
 }

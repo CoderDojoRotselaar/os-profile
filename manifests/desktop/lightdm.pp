@@ -24,6 +24,8 @@ class profile::desktop::lightdm {
   file { "${::profile::user::coderdojo_home}/.face":
     ensure => file,
     source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',
+    owner  => $coderdojo_user,
+    group  => $::profile::user::coderdojo_group,
   }
 
   file { '/etc/apt/apt.conf.d/99update-notifier':
