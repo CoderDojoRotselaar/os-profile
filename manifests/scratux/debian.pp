@@ -2,7 +2,7 @@ class profile::scratux::debian {
   include apt
 
   apt::source { 'scratux':
-    location => 'https://dl.bintray.com/scratux/stable',
+    location => 'http://dl.bintray.com/scratux/stable',
     release  => 'bionic',
     repos    => 'main',
     key      => {
