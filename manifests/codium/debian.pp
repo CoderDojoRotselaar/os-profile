@@ -2,7 +2,7 @@ class profile::codium::debian {
   include apt
 
   apt::source { 'codium':
-    location => 'http://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/',
+    location => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/',
     release  => 'vscodium',
     repos    => 'main',
     key      => {
