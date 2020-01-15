@@ -30,7 +30,7 @@ class profile::secrets (
         require => [
           Package['git-crypt'],
           Vcsrepo['/root/secrets'],
-        ]
+        ],
         unless  => '/usr/bin/test -f /root/secrets/.git/git-crypt/keys/default',
       }
     }
