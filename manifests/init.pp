@@ -17,4 +17,5 @@ class profile {
   include ::profile::python
   include ::profile::secrets
   include ::profile::wifi
+  include ::profile::hostname
 }
