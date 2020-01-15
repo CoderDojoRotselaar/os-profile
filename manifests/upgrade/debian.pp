@@ -7,4 +7,6 @@ class profile::upgrade::debian {
   file { '/etc/apt/apt.conf':
     ensure  => absent,
   }
+
+  Package <| |> -> File['/etc/apt/apt.conf']
 }

@@ -27,8 +27,10 @@ class profile::secrets (
       exec { 'unlock /root/secrets':
         command => "/usr/bin/git-crypt unlock ${key_path}",
         cwd     => '/root/secrets',
-        require => Package['git-crypt'],
-        require => Vcsrepo['/root/secrets'],
+        require => [
+          Package['git-crypt'],
+          Vcsrepo['/root/secrets'],
+        ]
         unless  => '/usr/bin/test -f /root/secrets/.git/git-crypt/keys/default',
       }
     }
