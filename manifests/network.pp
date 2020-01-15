@@ -26,10 +26,7 @@ define profile::network (
     'ifname'   => $ifname,
   }
   $type_params = $type ? {
-    'wifi'  => {
-      'ssid'     => $ssid,
-      'password' => $password,
-    },
+    'wifi'  => { 'ssid' => $ssid },
     'vpn'   => { 'vpn-type' => $vpn_type },
     default => {},
   }
@@ -57,6 +54,20 @@ define profile::network (
   exec { "Create wired network '${con_name}'":
     command => $command,
     creates => $created_file,
+  }
+
+  if $password and $password != topsecret {
+    $unwrapped_password = $password.unwrap
+
+    if $username {
+      $auth_command = "/usr/bin/nmcli con modify '${con_name}' 802-1x.password '${unwrapped_password}'"
+    } else {
+      $auth_command = "/usr/bin/nmcli con modify '${con_name}' wifi-sec.key-mgmt wpa-psk wifi-sec.psk '${unwrapped_password}'"
+    }
+
+    exec { "Authenticate to ${type} network '${con_name}'":
+      command => $auth_command,
+    }
   }
 }
 
