@@ -2,6 +2,10 @@ class profile::secrets (
   Optional[String] $secret_repo = undef,
   Optional[String] $key_path = undef,
 ) {
+  package { 'git-crypt':
+    ensure => latest,
+  }
+
   if $secret_repo {
     file { '/root/secrets':
       ensure  => directory,
@@ -23,6 +27,7 @@ class profile::secrets (
       exec { 'unlock /root/secrets':
         command => "/usr/bin/git-crypt unlock ${key_path}",
         cwd     => '/root/secrets',
+        require => Package['git-crypt'],
         require => Vcsrepo['/root/secrets'],
         unless  => '/usr/bin/test -f /root/secrets/.git/git-crypt/keys/default',
       }
