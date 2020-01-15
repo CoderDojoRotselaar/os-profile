@@ -16,4 +16,5 @@ class profile {
   include ::profile::ruby
   include ::profile::python
   include ::profile::secrets
+  include ::profile::wifi
 }
