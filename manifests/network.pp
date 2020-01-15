@@ -61,7 +61,9 @@ define profile::network (
     }
 
     exec { "Authenticate to ${type} network '${con_name}'":
-      command => $auth_command,
+      command     => $auth_command,
+      refreshonly => true,
+      require     => Exec["Create wired network '${con_name}'"],
     }
   }
 }
