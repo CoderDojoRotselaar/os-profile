@@ -15,15 +15,16 @@ class profile::secrets (
       ensure   => latest,
       user     => 'root',
       provider => git,
+      depth    => 1,
       source   => $secret_repo,
     }
 
     if $key_path {
       exec { 'unlock /root/secrets':
-        command     => "/usr/bin/git-crypt unlock ${key_path}",
-        cwd         => '/root/secrets',
-        require     => Vcsrepo['/root/secrets'],
-        refreshonly => true,
+        command => "/usr/bin/git-crypt unlock ${key_path}",
+        cwd     => '/root/secrets',
+        require => Vcsrepo['/root/secrets'],
+        unless  => '/usr/bin/test -f /root/secrets/.git/git-crypt/keys/default',
       }
     }
   }
