@@ -1,9 +1,11 @@
 class profile::hostname (
-  String $hostname = 'coderdojo',
+  Hash[String, String] $lookup = {},
 ) {
-  if $::hostname != $hostname {
-    exec { "Changing my hostname from '${::hostname}' to '${hostname}'":
-      command => "/usr/bin/hostnamectl set-hostname '${hostname}'",
+  $my_hostname = pick($lookup[$facts['uuid']], 'coderdojo')
+
+  if $::hostname != $my_hostname {
+    exec { "Changing my hostname from '${::hostname}' to '${my_hostname}'":
+      command => "/usr/bin/hostnamectl set-hostname '${my_hostname}'",
     }
   }
 }
