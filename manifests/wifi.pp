@@ -4,7 +4,7 @@ class profile::wifi {
   $networks.each |$net, $config| {
     profile::network { $config['ssid']:
       type     => 'wifi',
-      password => $config['password'],
+      password => Sensitive($config['password']),
     }
   }
 }
