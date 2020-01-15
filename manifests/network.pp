@@ -31,11 +31,6 @@ define profile::network (
     default => {},
   }
 
-  $created_file = $type ? {
-    'vpn'   => "/etc/NetworkManager/system-connections/${con_name}.nmconnection",
-    default => "/etc/sysconfig/network-scripts/ifcfg-${con_name}",
-  }
-
   $merged_command_params = merge($command_params, $type_params)
 
   $add_command_params = $merged_command_params.reduce('') |String $memo, Array $pair| {
@@ -53,7 +48,7 @@ define profile::network (
 
   exec { "Create wired network '${con_name}'":
     command => $command,
-    creates => $created_file,
+    unless  => "/usr/bin/nmcli con show '${con_name}'"
   }
 
   if $password and $password != topsecret {
