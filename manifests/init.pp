@@ -1,4 +1,5 @@
 class profile {
+  include ::profile::hostname
   include ::profile::disks
   include ::profile::time
   include ::profile::keyboard
@@ -17,5 +18,4 @@ class profile {
   include ::profile::python
   include ::profile::secrets
   include ::profile::wifi
-  include ::profile::hostname
 }
