@@ -15,4 +15,5 @@ class profile {
   include ::profile::git
   include ::profile::ruby
   include ::profile::python
+  include ::profile::secrets
 }
