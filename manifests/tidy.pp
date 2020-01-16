@@ -1,6 +1,6 @@
 class profile::tidy {
   tidy { 'prune_old_crashes':
-    path    => '/var/cache',
+    path    => '/var/crash',
     recurse => 1,
   }
 }
