@@ -2,6 +2,7 @@ class profile {
   include ::profile::disks
   include ::profile::hostname
   include ::profile::ssh
+  include ::profile::ping
   include ::profile::time
   include ::profile::keyboard
   include ::profile::locale
