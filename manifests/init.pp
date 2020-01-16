@@ -18,4 +18,10 @@ class profile {
   include ::profile::python
   include ::profile::secrets
   include ::profile::wifi
+
+  case $facts['os']['family'] {
+    'RedHat': { include profile::redhat  }
+    'Debian': { include profile::debian  }
+    default:  { } # do nothing
+  }
 }
