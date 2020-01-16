@@ -20,16 +20,25 @@ class profile::netplan {
     $result
   }
 
+  $settings = {
+    'header' => '# THIS FILE IS CONTROLLED BY PUPPET',
+  }
   $config = {
     'network' => {
       'version'   => 2,
-      'rederer'   => 'networkd',
+      'renderer'   => 'networkd',
       'ethernets' => $ethernet_configs,
     }
   }
 
-  file { '/tmp/netplan.yaml':
+  file { '/etc/netplan/01-netcfg.yaml':
     ensure  => file,
-    content => hash2yaml($config),
+    content => hash2yaml($config, $settings),
+  }
+
+  exec { 'apply netplan':
+    command     => '/usr/sbin/netplan apply',
+    subscribe   => File['/etc/netplan/01-netcfg.yaml'],
+    refreshonly => true,
   }
 }
