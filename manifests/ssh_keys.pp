@@ -1,13 +1,18 @@
 class profile::ssh_keys (
   Hash[String, Hash] $keys = {},
 ) {
-  $coderdojo_defaults = {
-    'user' => $::profile::user::coderdojo_user,
+  $keys.each |$k_name, $k| {
+    ssh_authorized_key {
+      "${k_name}:${::profile::user::coderdojo_user}":
+        name => $k_name,
+        user => $::profile::user::coderdojo_user,
+        *    => $k,
+        ;
+      "${k_name}:root":
+        name => $k_name,
+        user => 'root',
+        *    => $k,
+        ;
+    }
   }
-  $root_defaults = {
-    'user' => 'root',
-  }
-
-  create_resources(ssh_authorized_key, $keys, $coderdojo_defaults)
-  create_resources(ssh_authorized_key, $keys, $root_defaults)
 }
