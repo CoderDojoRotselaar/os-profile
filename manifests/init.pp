@@ -18,6 +18,7 @@ class profile {
   include ::profile::python
   include ::profile::secrets
   include ::profile::wifi
+  include ::profile::ssh_keys
 
   case $facts['os']['family'] {
     'RedHat': { include profile::redhat  }
