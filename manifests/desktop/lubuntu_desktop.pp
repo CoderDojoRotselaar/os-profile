@@ -62,8 +62,9 @@ class profile::desktop::lubuntu_desktop (
     refreshonly => true,
   }
   exec { "Set number of desktops to ${desktops}":
-    command => "/usr/bin/wmctrl -n ${desktops}",
-    user    => $::profile::user::coderdojo_user,
-    unless  => "/usr/bin/wmctrl -d | /usr/bin/wc -l | grep -Fx ${desktops}",
+    environment => 'DISPLAY=:0',
+    command     => "/usr/bin/wmctrl -n ${desktops}",
+    user        => $::profile::user::coderdojo_user,
+    unless      => "/usr/bin/wmctrl -d | /usr/bin/wc -l | grep -Fx ${desktops}",
   }
 }
