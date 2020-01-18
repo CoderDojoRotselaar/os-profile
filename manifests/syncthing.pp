@@ -9,8 +9,10 @@ class profile::syncthing (
   include ::syncthing
 
   ::syncthing::instance { 'coderdojo-projects':
-    home_path         => '/etc/syncthing/coderdojo-projects',
-    gui_password      => $password,
-    require           => File['/etc/syncthing'],
+    home_path    => '/etc/syncthing/coderdojo-projects',
+    gui_address  => '[::1]',
+    daemon_uid   => 'coderdojo',
+    gui_password => $password,
+    require      => File['/etc/syncthing'],
   }
 }
