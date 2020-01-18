@@ -70,4 +70,9 @@ class profile::syncthing (
     devices       => $devices,
     require       => File[$projects_folder],
   }
+  ::syncthing::folder { 'default':
+    ensure        => absent,
+    home_path     => $home_path,
+    instance_name => $instance_name,
+  }
 }
