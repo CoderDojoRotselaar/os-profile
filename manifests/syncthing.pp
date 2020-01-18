@@ -44,7 +44,7 @@ class profile::syncthing (
     require      => File['/etc/syncthing'],
   }
 
-  $devices = $device_ids.each |$dev_uuid, $st_uuid| {
+  $device_ids.each |$dev_uuid, $st_uuid| {
     if $dev_uuid != $::uuid {
       ::syncthing::device { $st_uuid:
         home_path     => $home_path,
