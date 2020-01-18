@@ -36,13 +36,13 @@ class profile::syncthing (
   include ::syncthing
 
   ::syncthing::instance { $instance_name:
-    home_path    => $home_path,
-    gui_address  => '127.0.0.1',
-    gui_tls      => false,
-    daemon_uid   => $user,
-    gui_password => $password,
-    introducer   => true,
-    require      => File['/etc/syncthing'],
+    home_path         => $home_path,
+    gui_address       => '127.0.0.1',
+    gui_tls           => false,
+    daemon_uid        => $user,
+    gui_password      => $password,
+    device_introducer => true,
+    require           => File['/etc/syncthing'],
   }
 
   if $device_id {
