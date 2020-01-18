@@ -46,7 +46,7 @@ class profile::syncthing (
     instance_options => {
       urAccepted => 1,
       urSeen     => 3,
-    }
+    },
     require          => File['/etc/syncthing'],
   }
 
