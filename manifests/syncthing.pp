@@ -38,16 +38,16 @@ class profile::syncthing (
   include ::syncthing
 
   ::syncthing::instance { $instance_name:
-    home_path        => $home_path,
-    gui_address      => '127.0.0.1',
-    gui_tls          => false,
-    daemon_uid       => $user,
-    gui_password     => $password,
-    instance_options => {
+    home_path    => $home_path,
+    gui_address  => '127.0.0.1',
+    gui_tls      => false,
+    daemon_uid   => $user,
+    gui_password => $password,
+    options      => {
       urAccepted => 1,
       urSeen     => 3,
     },
-    require          => File['/etc/syncthing'],
+    require      => File['/etc/syncthing'],
   }
 
   $device_ids.each |$dev_hostname, $st_uuid| {
