@@ -55,7 +55,7 @@ class profile::syncthing (
       ::syncthing::device { $dev_hostname:
         home_path     => $home_path,
         instance_name => $instance_name,
-        compression   => true,
+        compression   => 'always',
         introducer    => true,
         id            => $st_uuid,
       }
