@@ -1,5 +1,5 @@
 class profile::syncthing (
-  Hash[String, String] $device_ids = {},
+  Hash[String, String] $devices = {},
   Optional[String] $password = undef,
 ) {
   $my_hostname = $::profile::hostname::my_hostname
@@ -9,11 +9,10 @@ class profile::syncthing (
   $projects_id = $instance_name
   $home_path = "/etc/syncthing/${instance_name}"
   $user = $::profile::user::coderdojo_user
-  $device_id = $device_ids[$::uuid]
-  $devices = $device_ids.reduce({}) |$collection, $item| {
-    $dev_hostname = $item[0]
+  $device_uuid = $devices[$my_hostname]
+  $devices_present = $devices.reduce({}) |$collection, $item| {
     $st_uuid = $item[1]
-    if $dev_hostname == $my_hostname {
+    if $st_uuid == $device_uuid {
       $result = $collection
     } else {
       $result = $collection.merge(
@@ -50,8 +49,8 @@ class profile::syncthing (
     require      => File['/etc/syncthing'],
   }
 
-  $device_ids.each |$dev_hostname, $st_uuid| {
-    if $dev_hostname == $my_hostname {
+  $devices.each |$dev_hostname, $st_uuid| {
+    if $st_uuid != $device_uuid {
       ::syncthing::device { $st_uuid:
         home_path     => $home_path,
         instance_name => $instance_name,
@@ -71,7 +70,7 @@ class profile::syncthing (
       'versioning'      => 'simple',
       'versioning_keep' => '5',
     },
-    devices       => $devices,
+    devices       => $devices_present,
     require       => File[$projects_folder],
   }
   ::syncthing::folder { 'default':
