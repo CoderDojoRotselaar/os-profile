@@ -11,11 +11,15 @@ class profile::syncthing (
   $devices = $device_ids.reduce({}) |$collection, $item| {
     $dev_uuid = $item[0]
     $st_uuid = $item[1]
-    $result = $collection.merge(
-      {
-        $st_uuid => 'present'
-      }
-    )
+    if $dev_uuid == $::uuid {
+      $result = $collection
+    } else {
+      $result = $collection.merge(
+        {
+          $st_uuid => 'present'
+        }
+      )
+    }
     $result
   }
 
