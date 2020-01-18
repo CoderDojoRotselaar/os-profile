@@ -11,6 +11,7 @@ class profile::syncthing (
   ::syncthing::instance { 'coderdojo-projects':
     home_path    => '/etc/syncthing/coderdojo-projects',
     gui_address  => '127.0.0.1',
+    gui_tls      => false,
     daemon_uid   => 'coderdojo',
     gui_password => $password,
     require      => File['/etc/syncthing'],
