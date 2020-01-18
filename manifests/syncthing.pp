@@ -8,7 +8,8 @@ class profile::syncthing (
   $instance_name = 'coderdojo-projects'
   $projects_id = $instance_name
   $home_path = "/etc/syncthing/${instance_name}"
-  $user = $::profile::user::coderdojo_user
+  $owner = $::profile::user::coderdojo_user
+  $group = $::profile::user::coderdojo_group
   $device_uuid = $devices[$my_hostname]
   $devices_present = $devices.reduce({}) |$collection, $item| {
     $st_uuid = $item[1]
@@ -24,24 +25,28 @@ class profile::syncthing (
     $result
   }
 
-  file { '/etc/syncthing/coderdojo-projects':
+  file { $home_path:
     ensure  => directory,
     source  => [
       "/root/secrets/syncthing/${my_hostname}",
       '/root/secrets/syncthing/coderdojo',
     ],
     recurse => remote,
+    owner   => $owner,
+    group   => $group,
     require => Vcsrepo['/root/secrets'],
   }
 
   file { '/etc/syncthing':
     ensure => directory,
-    owner  => $user,
+    owner  => $owner,
+    group  => $group,
   }
 
   file { $projects_folder:
     ensure => directory,
-    owner  => $user,
+    owner  => $owner,
+    group  => $group,
   }
 
   include ::syncthing
@@ -51,13 +56,13 @@ class profile::syncthing (
     gui_address  => '127.0.0.1',
     gui_port     => 8384,
     gui_tls      => false,
-    daemon_uid   => $user,
+    daemon_uid   => $owner,
     gui_password => $password,
     options      => {
       urAccepted => 1,
       urSeen     => 3,
     },
-    require      => File['/etc/syncthing'],
+    require      => File[$home_path],
   }
 
   $devices.each |$dev_hostname, $st_uuid| {
