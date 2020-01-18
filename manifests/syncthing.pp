@@ -41,6 +41,7 @@ class profile::syncthing (
     gui_tls      => false,
     daemon_uid   => $user,
     gui_password => $password,
+    introducer   => true,
     require      => File['/etc/syncthing'],
   }
 
