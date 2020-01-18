@@ -24,6 +24,8 @@ class profile::secrets (
     }
 
     if $key_path {
+      Package['git-crypt'] -> Vcsrepo['/root/secrets']
+
       exec { 'unlock /root/secrets':
         command => "/usr/bin/git-crypt unlock ${key_path}",
         cwd     => '/root/secrets',
