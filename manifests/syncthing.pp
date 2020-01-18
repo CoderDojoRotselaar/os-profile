@@ -24,6 +24,16 @@ class profile::syncthing (
     $result
   }
 
+  file { '/etc/syncthing/coderdojo-projects':
+    ensure  => directory,
+    source  => [
+      "/root/secrets/syncthing/${my_hostname}",
+      '/root/secrets/syncthing/coderdojo',
+    ],
+    recurse => remote,
+    require => Vcsrepo['/root/secrets'],
+  }
+
   file { '/etc/syncthing':
     ensure => directory,
     owner  => $user,
