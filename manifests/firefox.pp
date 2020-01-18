@@ -32,7 +32,7 @@ class profile::firefox {
     source       => '/var/lib/puppet-deployment/assets/firefox-profile.tar.bz2',
     extract      => true,
     extract_path => "${coderdojo_home}/.mozilla/firefox",
-    creates      => "${coderdojo_home}/.mozilla/firefox/profile.ini",
+    creates      => "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/prefs.js",
     cleanup      => false,
     user         => $::profile::user::coderdojo_user,
     group        => $::profile::user::coderdojo_group,
