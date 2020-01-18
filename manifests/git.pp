@@ -16,17 +16,11 @@ class profile::git (
   file {
     '/usr/local/sync-git':
       ensure => absent,
-      ;
-
-    '/usr/local/sync-git/sync-git':
-      ensure  => absent,
+      force  => true,
       ;
     '/var/lib/coderdojo':
       ensure => absent,
-      ;
-
-    '/var/lib/coderdojo/.repokey':
-      ensure => absent,
+      force  => true,
       ;
   }
 }
