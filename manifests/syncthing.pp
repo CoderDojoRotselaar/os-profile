@@ -73,7 +73,7 @@ class profile::syncthing (
   ::syncthing::folder { 'default':
     ensure        => absent,
     home_path     => $home_path,
-    path          => "${::profile::user::coderdojo_home}/Sync"
+    path          => "${::profile::user::coderdojo_home}/Sync",
     instance_name => $instance_name,
   }
 }
