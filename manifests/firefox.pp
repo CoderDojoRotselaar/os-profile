@@ -27,7 +27,7 @@ class profile::firefox {
       ;
   }
 
-  archive { 'firefox-profile.tar.bz2':
+  archive { '/var/lib/puppet-deployment/assets/firefox-profile.tar.bz2':
     ensure       => present,
     source       => 'file:///var/lib/puppet-deployment/assets/firefox-profile.tar.bz2',
     extract      => true,
