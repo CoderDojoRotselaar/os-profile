@@ -39,6 +39,7 @@ class profile::syncthing (
   ::syncthing::instance { $instance_name:
     home_path    => $home_path,
     gui_address  => '127.0.0.1',
+    gui_port     => 8384,
     gui_tls      => false,
     daemon_uid   => $user,
     gui_password => $password,
