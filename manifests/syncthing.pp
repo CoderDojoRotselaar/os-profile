@@ -44,13 +44,15 @@ class profile::syncthing (
     require      => File['/etc/syncthing'],
   }
 
-  if $device_id {
-    ::syncthing::device { $::hostname:
-      home_path     => $home_path,
-      instance_name => $instance_name,
-      compression   => true,
-      introducer    => true,
-      id            => $device_id,
+  $devices = $device_ids.each |$dev_uuid, $st_uuid| {
+    if $dev_uuid != $::uuid {
+      ::syncthing::device { $st_uuid:
+        home_path     => $home_path,
+        instance_name => $instance_name,
+        compression   => true,
+        introducer    => true,
+        id            => $st_uuid,
+      }
     }
   }
 
