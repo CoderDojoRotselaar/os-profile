@@ -1,15 +1,8 @@
 class profile::syncthing (
 ) {
-  class { '::syncthing':
-    instances => {
-      'coderdojo-projects' => {
-        home_path  => '/etc/syncthing/coderdojo-projects',
-        daemon_uid => 'coderdojo',
-        daemon_gid => 'coderdojo',
+  include ::syncthing
 
-        # Variables for standard parameters
-        gui_tls    => true,
-      }
-    }
+  ::syncthing::instance { 'coderdojo-projects':
+    gui_tls => true,
   }
 }
