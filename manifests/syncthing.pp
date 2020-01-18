@@ -81,11 +81,6 @@ class profile::syncthing (
     home_path     => $home_path,
     instance_name => $instance_name,
     path          => $projects_folder,
-    options       => {
-      # for simple versioning
-      'versioning'      => 'simple',
-      'versioning_keep' => '5',
-    },
     devices       => $devices_present,
     require       => File[$projects_folder],
   }
