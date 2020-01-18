@@ -51,7 +51,7 @@ class profile::syncthing (
 
   $devices.each |$dev_hostname, $st_uuid| {
     if $st_uuid != $device_uuid {
-      ::syncthing::device { $st_uuid:
+      ::syncthing::device { $dev_hostname:
         home_path     => $home_path,
         instance_name => $instance_name,
         compression   => true,
