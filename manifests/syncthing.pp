@@ -40,11 +40,13 @@ class profile::syncthing (
     require      => File['/etc/syncthing'],
   }
 
-  ::syncthing::device { $::hostname:
-    home_path     => $home_path,
-    instance_name => $instance_name,
-    compression   => true,
-    id            => $device_id,
+  if $device_id {
+    ::syncthing::device { $::hostname:
+      home_path     => $home_path,
+      instance_name => $instance_name,
+      compression   => true,
+      id            => $device_id,
+    }
   }
 
   ::syncthing::folder { $projects_id:
