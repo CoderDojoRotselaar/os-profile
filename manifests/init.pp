@@ -21,6 +21,7 @@ class profile {
   include ::profile::secrets
   include ::profile::wifi
   include ::profile::ssh_keys
+  include ::profile::syncthing
   include ::profile::tidy
 
   case $facts['os']['family'] {
