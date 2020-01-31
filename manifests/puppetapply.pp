@@ -23,6 +23,10 @@ class profile::puppetapply {
   }
 
   service {
+    'puppet.service':
+      ensure => stopped,
+      enable => false,
+      ;
     'puppet-apply.service':
       enable => true,
       ;
