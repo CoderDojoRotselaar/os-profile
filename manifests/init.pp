@@ -18,6 +18,7 @@ class profile {
   include ::profile::git
   include ::profile::ruby
   include ::profile::python
+  include ::profile::snaps
   include ::profile::secrets
   include ::profile::wifi
   include ::profile::ssh_keys
