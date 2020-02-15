@@ -24,7 +24,7 @@ class profile {
   include ::profile::ssh_keys
   include ::profile::syncthing
   include ::profile::tidy
-  include ::profile::mbot
+  include ::profile::mlink
 
   case $facts['os']['family'] {
     'RedHat': { include profile::redhat  }
