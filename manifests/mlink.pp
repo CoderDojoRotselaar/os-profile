@@ -19,4 +19,22 @@ class profile::mlink (
     source   => $deb_local,
     require  => File[$deb_local],
   }
+
+  file { '/usr/lib/systemd/system/mlink.service':
+    source  => file('profile/mlink.service'),
+    require => Package['mlink'],
+    notify  => [
+      Class['profile::systemd'],
+      Service['mlink'],
+    ],
+  }
+
+  service { 'mlink':
+    ensure  => running,
+    enable  => true,
+    require => [
+      File['/usr/lib/systemd/system/mlink.service'],
+      Package['mlink'],
+    ]
+  }
 }

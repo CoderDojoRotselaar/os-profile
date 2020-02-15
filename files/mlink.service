@@ -1,0 +1,11 @@
+[Unit]
+Description=Run the mLink driver
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/local/makeblock/mLink/mlink start
+
+[Install]
+WantedBy=multi-user.target
