@@ -16,7 +16,7 @@ class profile::mlink (
   package { 'mlink':
     ensure   => installed,
     provider => 'dpkg',
-    source   => $deb_file,
-    require  => File[$deb_file],
+    source   => $deb_local,
+    require  => File[$deb_local],
   }
 }
