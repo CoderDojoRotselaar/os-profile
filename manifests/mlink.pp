@@ -2,7 +2,7 @@ class profile::mlink (
   $version = '1.2.0'
 ) {
   $deb_file = "mLink-${version}-amd64.deb"
-  $deb_url = "https://dl.makeblock.com/mblock5/linux/${deb_file}"
+  $deb_url = "http://dl.makeblock.com/mblock5/linux/${deb_file}"
   $deb_local = "/var/lib/dpkg/local/${deb_file}"
 
   file { '/var/lib/dpkg/local/':
