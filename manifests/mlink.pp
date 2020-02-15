@@ -21,7 +21,7 @@ class profile::mlink (
   }
 
   file { '/usr/lib/systemd/system/mlink.service':
-    source  => file('profile/mlink.service'),
+    content => file('profile/mlink.service'),
     require => Package['mlink'],
     notify  => [
       Class['profile::systemd'],
