@@ -20,7 +20,7 @@ class profile::mlink (
     require  => File[$deb_local],
   }
 
-  file { '/usr/lib/systemd/system/mlink.service':
+  file { '/lib/systemd/system/mlink.service':
     content => file('profile/mlink.service'),
     require => Package['mlink'],
     notify  => [
@@ -33,7 +33,7 @@ class profile::mlink (
     ensure  => running,
     enable  => true,
     require => [
-      File['/usr/lib/systemd/system/mlink.service'],
+      File['/lib/systemd/system/mlink.service'],
       Package['mlink'],
     ]
   }
