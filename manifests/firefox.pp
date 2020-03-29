@@ -43,7 +43,7 @@ class profile::firefox {
     "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/bookmarks.html":
       ensure  => present,
       source  => '/var/lib/puppet-deployment/assets/bookmarks.html',
-      user    => $::profile::user::coderdojo_user,
+      owner   => $::profile::user::coderdojo_user,
       group   => $::profile::user::coderdojo_group,
       require => Archive['/var/lib/puppet-deployment/assets/firefox-profile.tar.bz2'],
       ;
