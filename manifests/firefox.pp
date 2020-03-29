@@ -1,4 +1,6 @@
-class profile::firefox {
+class profile::firefox (
+  Hash $bookmarks = {},
+) {
   $coderdojo_home = $::profile::user::coderdojo_home
 
   package { 'firefox':
@@ -50,5 +52,14 @@ class profile::firefox {
     "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/places.sqlite":
       ensure => absent,
       ;
+  }
+
+  if (!empty($bookmarks)) {
+    file { "${coderdojo_home}/.mozilla/firefox/bookmarks.json":
+      ensure  => present,
+      owner   => $::profile::user::coderdojo_user,
+      group   => $::profile::user::coderdojo_group,
+      content => hash2json($bookmarks)
+    }
   }
 }
