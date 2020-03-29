@@ -44,22 +44,14 @@ class profile::firefox (
   file {
     "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/bookmarks.html":
       ensure  => present,
-      source  => '/var/lib/puppet-deployment/assets/bookmarks.html',
       owner   => $::profile::user::coderdojo_user,
       group   => $::profile::user::coderdojo_group,
+      content => template('profile/bookmarks.html.erb'),
       require => Archive['/var/lib/puppet-deployment/assets/firefox-profile.tar.bz2'],
       ;
     "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/places.sqlite":
-      ensure => absent,
+      ensure    => absent,
+      subscribe => File["${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/bookmarks.html"],
       ;
-  }
-
-  if (!empty($bookmarks)) {
-    file { "${coderdojo_home}/.mozilla/firefox/bookmarks.json":
-      ensure  => present,
-      owner   => $::profile::user::coderdojo_user,
-      group   => $::profile::user::coderdojo_group,
-      content => hash2json($bookmarks)
-    }
   }
 }
