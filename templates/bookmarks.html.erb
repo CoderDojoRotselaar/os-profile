@@ -11,8 +11,8 @@
 <DL><p>
     <DT><H3 PERSONAL_TOOLBAR_FOLDER="true">Bladwijzerwerkbalk</H3>
     <DL><p>
-        <% @bookmarks.each do |name, config| %>
+        <%- @bookmarks.each do |name, config| -%>
           <DT><A HREF="<%= config['url'] %>" ICON_URI="<%= config['favicon'] %>"><%= config['title'] %></A>
-        <% end %>
+        <%- end -%>
     </DL><p>
 </DL>
