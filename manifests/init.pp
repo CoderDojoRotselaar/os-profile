@@ -14,6 +14,7 @@ class profile {
   include ::profile::scratux
   include ::profile::codium
   include ::profile::firefox
+  include ::profile::chromium
   include ::profile::upgrade
   include ::profile::git
   include ::profile::ruby
