@@ -2,6 +2,7 @@ class profile::firefox (
   Hash $bookmarks = {},
 ) {
   $coderdojo_home = $::profile::user::coderdojo_home
+  $firefox_profile = "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release"
 
   package { 'firefox':
     ensure => installed,
@@ -34,7 +35,7 @@ class profile::firefox (
     source       => '/var/lib/puppet-deployment/assets/firefox-profile.tar.bz2',
     extract      => true,
     extract_path => "${coderdojo_home}/.mozilla/firefox",
-    creates      => "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/prefs.js",
+    creates      => "${firefox_profile}/prefs.js",
     cleanup      => false,
     user         => $::profile::user::coderdojo_user,
     group        => $::profile::user::coderdojo_group,
@@ -42,16 +43,23 @@ class profile::firefox (
   }
 
   file {
-    "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/bookmarks.html":
+    "${firefox_profile}/bookmarks.html":
       ensure  => present,
       owner   => $::profile::user::coderdojo_user,
       group   => $::profile::user::coderdojo_group,
       content => template('profile/bookmarks.html.erb'),
       require => Archive['/var/lib/puppet-deployment/assets/firefox-profile.tar.bz2'],
       ;
-    "${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/places.sqlite":
+    "${firefox_profile}/places.sqlite":
       ensure    => absent,
-      subscribe => File["${coderdojo_home}/.mozilla/firefox/coderdojo.default-release/bookmarks.html"],
+      subscribe => File["${firefox_profile}/bookmarks.html"],
       ;
+  }
+
+  exec { 'remove bookmark backups':
+    command     => "/bin/rm ${firefox_profile}/bookmarkbackups/",
+    onlyif      => "/usr/bin/test -d ${firefox_profile}/bookmarkbackups/",
+    refreshonly => true,
+    require     => File["${firefox_profile}/bookmarks.html"],
   }
 }
