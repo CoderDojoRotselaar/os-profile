@@ -1,9 +1,9 @@
 class profile::packages (
-  Array[String] $auto_update = [],
+  Array[String] $install = [],
 ) {
   require ::profile::disks
 
-  package { $auto_update:
-    ensure => latest,
+  package { $install:
+    ensure => installed,
   }
 }

@@ -3,7 +3,7 @@ class profile::secrets (
   Optional[String] $key_path = undef,
 ) {
   package { 'git-crypt':
-    ensure => latest,
+    ensure => installed,
   }
 
   if $secret_repo {
