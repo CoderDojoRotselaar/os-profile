@@ -26,6 +26,7 @@ class profile {
   include ::profile::syncthing
   include ::profile::tidy
   include ::profile::mlink
+  include ::profile::info
 
   case $facts['os']['family'] {
     'RedHat': { include profile::redhat  }
