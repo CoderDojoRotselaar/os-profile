@@ -18,7 +18,7 @@ class profile::disks (
             'size_is_minsize' => true,
           },
           'var'    => {
-            'size'            => '3G',
+            'size'            => '5G',
             'size_is_minsize' => true,
           },
           'home'   => {
