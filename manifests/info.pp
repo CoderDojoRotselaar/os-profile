@@ -10,6 +10,8 @@ class profile::info {
 
   file { "${::profile::user::coderdojo_home}/projects/machines/${::hostname}.info":
     source  => '/tmp/machine-info',
+    owner   => $::profile::user::coderdojo_user,
+    group   => $::profile::user::coderdojo_group,
     require => [
       Exec['update-info'],
       File["${::profile::user::coderdojo_home}/projects"],
@@ -22,6 +24,8 @@ class profile::info {
 
   file { "${::profile::user::coderdojo_home}/projects/machines/${::hostname}.facts":
     source  => '/tmp/machine-facts',
+    owner   => $::profile::user::coderdojo_user,
+    group   => $::profile::user::coderdojo_group,
     require => [
       Exec['update-facts'],
       File["${::profile::user::coderdojo_home}/projects"],
