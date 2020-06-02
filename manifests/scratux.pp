@@ -9,7 +9,7 @@ class profile::scratux {
 
   include ::snapd
 
-  package { 'scratux-snap':
+  package { 'scratux':
     ensure   => installed,
     provider => 'snap',
   }
@@ -20,6 +20,6 @@ class profile::scratux {
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
     mode    => '0755',
-    require => Package['scratux-snap'],
+    require => Package['scratux'],
   }
 }

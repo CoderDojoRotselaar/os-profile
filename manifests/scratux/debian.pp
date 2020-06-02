@@ -12,8 +12,9 @@ class profile::scratux::debian {
     },
   }
 
-  package { 'scratux':
-    ensure  => absent,
-    require => Apt::Source['scratux'],
+  package { 'scratux-deb':
+    ensure   => absent,
+    name     => 'scatux',
+    provider => 'apt',
   }
 }

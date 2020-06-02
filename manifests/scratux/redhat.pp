@@ -1,9 +1,7 @@
 class profile::scratux::redhat {
-  $rpm = 'https://github.com/scratux/scratux/releases/download/v1.2/scratux-1.2.0.x86_64.rpm'
-
-  package { 'scratux':
+  package { 'scratux-rpm':
     ensure   => absent,
+    name     => 'scatux',
     provider => 'yum',
-    source   => $rpm,
   }
 }
