@@ -35,4 +35,6 @@ class profile::disks (
     },
     before        => User[$::profile::user::coderdojo_user],
   }
+
+  Class['lvm'] -> Package <| |>
 }
