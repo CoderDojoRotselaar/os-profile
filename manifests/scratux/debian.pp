@@ -2,6 +2,7 @@ class profile::scratux::debian {
   include apt
 
   apt::source { 'scratux':
+    ensure   => absent,
     location => 'https://dl.bintray.com/scratux/stable',
     release  => 'bionic',
     repos    => 'main',
@@ -12,7 +13,7 @@ class profile::scratux::debian {
   }
 
   package { 'scratux':
-    ensure  => installed,
+    ensure  => absent,
     require => Apt::Source['scratux'],
   }
 }

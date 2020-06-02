@@ -7,12 +7,19 @@ class profile::scratux {
     default:  { } # do nothing
   }
 
+  include ::snapd
+
+  package { 'scratux-snap':
+    ensure   => installed,
+    provider => 'snap',
+  }
+
   file { "${coderdojo_home}/Bureaublad/scratux.desktop":
     ensure  => file,
-    source  => '/usr/share/applications/scratux.desktop',
+    source  => '/var/lib/snapd/desktop/applications/scratux_scratux.desktop',
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
     mode    => '0755',
-    require => Package['scratux'],
+    require => Package['scratux-snap'],
   }
 }
