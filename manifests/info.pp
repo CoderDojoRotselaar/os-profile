@@ -4,7 +4,7 @@ class profile::info {
   }
 
   exec { 'update-info':
-    command => '/usr/bin/inxi -Firxxx -c 0 > /tmp/machine-info',
+    command => '/usr/bin/inxi -Firpluoxxxm -c 0 > /tmp/machine-info',
     require => Package['inxi'],
   }
 
