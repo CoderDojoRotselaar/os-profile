@@ -51,7 +51,7 @@ define profile::network (
     unless  => "/usr/bin/nmcli con show '${con_name}'"
   }
 
-  if $password and $password != topsecret {
+  if $password and $password != '' {
     $unwrapped_password = $password.unwrap
 
     if $username {
