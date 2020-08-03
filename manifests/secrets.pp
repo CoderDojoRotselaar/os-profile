@@ -2,6 +2,8 @@ class profile::secrets (
   Optional[String] $secret_repo = undef,
   Optional[String] $key_path = undef,
 ) {
+  tag 'early'
+  
   package { 'git-crypt':
     ensure => installed,
   }

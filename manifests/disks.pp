@@ -1,6 +1,8 @@
 class profile::disks (
   String $rootvg = 'coderdojo',
 ) {
+  tag 'early'
+
   include ::profile::user
 
   class { 'lvm':
