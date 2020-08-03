@@ -48,7 +48,8 @@ define profile::network (
 
   exec { "Create wired network '${con_name}'":
     command => $command,
-    unless  => "/usr/bin/nmcli con show '${con_name}'"
+    unless  => "/usr/bin/nmcli con show '${con_name}'",
+    require => Package['network-manager'],
   }
 
   if $password and $password != '' {
@@ -64,6 +65,7 @@ define profile::network (
       command     => $auth_command,
       refreshonly => true,
       subscribe   => Exec["Create wired network '${con_name}'"],
+      require     => Package['network-manager'],
     }
   }
 }

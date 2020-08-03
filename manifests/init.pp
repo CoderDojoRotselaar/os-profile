@@ -21,7 +21,7 @@ class profile {
   include ::profile::python
   include ::profile::snaps
   include ::profile::secrets
-  include ::profile::wifi
+  include ::profile::networks
   include ::profile::ssh_keys
   include ::profile::syncthing
   include ::profile::tidy

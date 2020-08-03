@@ -34,6 +34,7 @@ class profile::netplan {
   file { '/etc/netplan/01-netcfg.yaml':
     ensure  => file,
     content => hash2yaml($config, $settings),
+    require => Class[profile::networks],
   }
 
   exec { 'apply netplan':
