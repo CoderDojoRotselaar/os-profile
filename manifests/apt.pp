@@ -1,6 +1,4 @@
 class profile::apt {
-  tag 'early'
-
   $apt_custom_options = [
     'Acquire::Retries "5";',
     'Acquire::Queue-Mode "access";',
@@ -10,6 +8,13 @@ class profile::apt {
 
   file { '/etc/apt/apt.conf.d/80-custom':
     ensure  => present,
+    tag     => 'early',
     content => "${apt_custom_options_string}\n",
+  }
+
+  if ! $facts['deploy'] {
+    file { '/etc/apt/apt.conf':
+      ensure => absent,
+    }
   }
 }
