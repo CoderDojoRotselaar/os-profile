@@ -39,7 +39,7 @@ class profile::desktop::lightdm {
     content  => '',
   }
 
-  if $profile::desktop::background and !defined(Package['lubuntu-desktop']) {
+  if $profile::desktop::background and !('lubuntu-desktop' in $profile::desktop::installed_des) {
     $background_path = '/usr/share/backgrounds/coderdojo/coderdojo_background.png'
     $property_name = '/backdrop/screen0/monitor0/workspace0/last-image'
     exec {'update background':
