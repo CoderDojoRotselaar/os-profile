@@ -1,6 +1,8 @@
 class profile::desktop::lubuntu_desktop (
   Integer $desktops = 1,
 ) {
+  include ::profile::desktop::lightdm
+
   package { [
     'wmctrl', 'lxpanel', 'lubuntu-desktop',
   ]:
