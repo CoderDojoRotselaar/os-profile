@@ -1,13 +1,16 @@
 class profile::desktop::lightdm {
-  require profile::desktop::lubuntu_desktop
-
   $coderdojo_user = $::profile::user::coderdojo_user
+
+  package { ['lightdm', 'xfce4-panel', 'xfconf']:
+    ensure => installed,
+  }
 
   exec { "migrate ${coderdojo_user} panels":
     command     => '/usr/lib/x86_64-linux-gnu/xfce4/panel/migrate',
     refreshonly => true,
     subscribe   => User[$coderdojo_user],
     user        => $coderdojo_user,
+    require     => Package['xfce4-panel'],
   }
 
   $lightdm_config = {
@@ -19,6 +22,7 @@ class profile::desktop::lightdm {
   $lightdm_defaults = {
     path              => '/etc/lightdm/lightdm.conf',
     key_val_separator => '=',
+    require           => Package['lightdm'],
   }
 
   create_ini_settings($lightdm_config, $lightdm_defaults)
@@ -43,7 +47,7 @@ class profile::desktop::lightdm {
       path    => '/usr/bin:/bin:/snap/bin',
       command => "xfconf-query --channel xfce4-desktop --property '${property_name}' --set '${background_path}'",
       unless  => "xfconf-query --channel xfce4-desktop --property '${property_name}' | grep -q '^${background_path}$'",
-      require => File[$background_path],
+      require => [File[$background_path], Package['xfconf']],
     }
   }
 }
