@@ -37,9 +37,11 @@ class profile::netplan {
     require => Class[profile::networks],
   }
 
-  exec { 'apply netplan':
-    command     => '/usr/sbin/netplan apply',
-    subscribe   => File['/etc/netplan/01-netcfg.yaml'],
-    refreshonly => true,
+  if ! $facts['deploy'] {
+    exec { 'apply netplan':
+      command     => '/usr/sbin/netplan apply',
+      subscribe   => File['/etc/netplan/01-netcfg.yaml'],
+      refreshonly => true,
+    }
   }
 }
