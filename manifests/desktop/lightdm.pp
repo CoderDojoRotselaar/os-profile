@@ -34,9 +34,9 @@ class profile::desktop::lightdm {
     group  => $::profile::user::coderdojo_group,
   }
 
-  file { '/etc/apt/apt.conf.d/99update-notifier':
-    ensure  => file,
-    content => '',
+  apt::conf { 'update-notifier':
+    priority => 99,
+    content  => '',
   }
 
   if $profile::desktop::background and !defined(Package['lubuntu-desktop']) {
