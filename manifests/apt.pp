@@ -1,4 +1,6 @@
 class profile::apt {
+  tag 'early'
+
   $apt_custom_options = [
     'Acquire::Retries "5";',
     'Acquire::Queue-Mode "access";',
