@@ -7,7 +7,13 @@ class profile::upgrade::debian {
     }
   }
 
+  package { 'update-notifier':
+    ensure => installed,
+  }
+
   file { '/etc/xdg/autostart/update-notifier.desktop':
-    ensure => absent,
+    ensure  => present,
+    content => '# Disabled by Puppet',
+    require => Package['update-notifier'],
   }
 }
