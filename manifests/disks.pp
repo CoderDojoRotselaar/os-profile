@@ -3,8 +3,6 @@ class profile::disks (
 ) {
   tag 'early'
 
-  include ::profile::user
-
   class { 'lvm':
     volume_groups => {
       $rootvg => {
@@ -35,8 +33,8 @@ class profile::disks (
         },
       },
     },
-    before        => User[$::profile::user::coderdojo_user],
   }
 
   Class['lvm'] -> Package <| |>
+  Class['lvm'] -> User <| |>
 }
