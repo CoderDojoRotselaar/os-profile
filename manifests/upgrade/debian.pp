@@ -7,14 +7,7 @@ class profile::upgrade::debian {
     }
   }
 
-  file {
-    '/etc/apt/apt.conf':
-      ensure  => absent,
-      ;
-    '/etc/xdg/autostart/update-notifier.desktop':
-      ensure  => absent,
-      ;
+  file { '/etc/xdg/autostart/update-notifier.desktop':
+    ensure => absent,
   }
-
-  Package <| |> -> File['/etc/apt/apt.conf']
 }
