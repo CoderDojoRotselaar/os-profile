@@ -1,7 +1,9 @@
 class profile::desktop::lubuntu_desktop (
   Integer $desktops = 1,
 ) {
-  package { ['lubuntu-desktop', 'wmctrl']:
+  package { [
+    'wmctrl', 'lxpanel', 'lubuntu-desktop',
+  ]:
     ensure => installed,
     before => User[$::profile::user::coderdojo_user],
   }
@@ -60,11 +62,14 @@ class profile::desktop::lubuntu_desktop (
     command     => '/usr/bin/lxpanelctl restart',
     user        => $::profile::user::coderdojo_user,
     refreshonly => true,
+    require     => Package['lxpanel'],
   }
+
   exec { "Set number of desktops to ${desktops}":
     environment => 'DISPLAY=:0',
     command     => "/usr/bin/wmctrl -n ${desktops}",
     user        => $::profile::user::coderdojo_user,
     unless      => "/usr/bin/wmctrl -d | /usr/bin/wc -l | grep -Fx ${desktops}",
+    require     => Package['wmctrl'],
   }
 }
