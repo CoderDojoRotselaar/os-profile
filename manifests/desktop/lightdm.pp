@@ -1,4 +1,6 @@
 class profile::desktop::lightdm {
+  require profile::desktop::lubuntu_desktop
+
   $coderdojo_user = $::profile::user::coderdojo_user
 
   exec { "migrate ${coderdojo_user} panels":

@@ -7,14 +7,13 @@ class profile::desktop (
   $installed_des = $facts['desktop_sessions']
   notify { "Currently installed desktop environments: ${installed_des}": }
 
-  if empty($installed_des) {
+  if $environment and empty($installed_des) {
     notify { "Installing default DE for this host: '${environment}'": }
 
-    case $environment {
-      'lubuntu-desktop': { include ::profile::desktop::lubuntu_desktop }
-      undef:             { } # Nothing to do
-      default:           { fail("Unsupported environment requested: '$ { environment}'") }
-    }
+    $sanitized_env = regsubst($environment, /[^[:alnum:]+]/, '_', 'G')
+    $sanitized_env_class = "profile::desktop::${sanitized_env}"
+
+    include $sanitized_env_class
   }
 
   if $background {
