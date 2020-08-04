@@ -3,6 +3,7 @@ class profile::scratux::debian {
 
   apt::source { 'scratux':
     ensure   => absent,
+    tag      => 'early',
     location => 'https://dl.bintray.com/scratux/stable',
     release  => 'bionic',
     repos    => 'main',

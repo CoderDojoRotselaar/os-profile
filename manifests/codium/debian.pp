@@ -2,6 +2,8 @@ class profile::codium::debian {
   include apt
 
   apt::source { 'codium':
+    ensure   => present,
+    tag      => 'early',
     location => 'https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/',
     release  => 'vscodium',
     repos    => 'main',
