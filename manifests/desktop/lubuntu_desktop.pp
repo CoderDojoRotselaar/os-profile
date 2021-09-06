@@ -39,6 +39,7 @@ class profile::desktop::lubuntu_desktop (
     "${::profile::user::coderdojo_home}/.config/lxpanel",
     "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu",
     "${::profile::user::coderdojo_home}/.config/lxpanel/Lubuntu/panels",
+    "${::profile::user::coderdojo_home}/.config/clipit",
   ]:
     ensure => directory,
     owner  => $::profile::user::coderdojo_user,
@@ -58,6 +59,13 @@ class profile::desktop::lubuntu_desktop (
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
     notify  => Exec['Restart lxpanel'],
+  }
+
+  file { "${::profile::user::coderdojo_home}/.config/clipit/clipitrc":
+    ensure  => present,
+    content => file('profile/lubuntu_desktop/clipitrc'),
+    owner   => $::profile::user::coderdojo_user,
+    group   => $::profile::user::coderdojo_group,
   }
 
   exec { 'Restart lxpanel':
