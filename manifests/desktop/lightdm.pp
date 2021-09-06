@@ -35,7 +35,7 @@ class profile::desktop::lightdm {
       'SystemAccount' => false,
     },
     'InputSource0' => {
-      'xkb' => profile::keyboard::layout,
+      'xkb' => $profile::keyboard::layout,
     }
   }
 
