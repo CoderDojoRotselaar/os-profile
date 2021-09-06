@@ -43,9 +43,4 @@ class profile::desktop::gnome_shell {
       notify  => Exec['dconf update'],
     }
   }
-
-  exec { 'dconf update':
-    command     => '/usr/bin/dconf update',
-    refreshonly => true,
-  }
 }

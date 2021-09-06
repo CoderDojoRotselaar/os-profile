@@ -45,5 +45,10 @@ class profile::desktop (
     "profile::desktop::${sanitized_ds}"
   }
 
+  exec { 'dconf update':
+    command     => '/usr/bin/dconf update',
+    refreshonly => true,
+  }
+
   include $ds_classes
 }
