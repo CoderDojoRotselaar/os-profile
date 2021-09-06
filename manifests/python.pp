@@ -7,6 +7,6 @@ class profile::python (
   package { $pips:
     ensure   => installed,
     provider => 'pip',
-    require  => Package['python-pip'],
+    require  => Package['python3-pip'],
   }
 }
