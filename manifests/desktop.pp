@@ -19,15 +19,15 @@ class profile::desktop (
   case $environment {
     'lubuntu-desktop': {
       file {
-        "${::profile::user::coderdojo_home}/.xsession":
+        "${::profile::user::coderdojo_home}/.dmrc":
           ensure  => file,
-          content => '/usr/bin/startlxqt',
+          content => "[Desktop]\nSession=LXDE\n",
           owner   => $::profile::user::coderdojo_user,
           group   => $::profile::user::coderdojo_group,
           ;
         '/etc/X11/default-display-manager':
           ensure  => file,
-          content => '/usr/sbin/lightdm',
+          content => "/usr/sbin/lightdm\n",
           ;
       }
     }
@@ -35,13 +35,13 @@ class profile::desktop (
       file {
         "${::profile::user::coderdojo_home}/.xsession":
           ensure  => file,
-          content => '/usr/lib/gdm3/gdm-x-session',
+          content => "/usr/lib/gdm3/gdm-x-session\n",
           owner   => $::profile::user::coderdojo_user,
           group   => $::profile::user::coderdojo_group,
           ;
         '/etc/X11/default-display-manager':
           ensure  => file,
-          content => '/usr/sbin/gdm3',
+          content => "/usr/sbin/gdm3\n",
           ;
       }
     }
