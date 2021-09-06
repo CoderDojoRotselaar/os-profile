@@ -50,7 +50,7 @@ class profile::desktop (
           ;
         '/etc/systemd/system/display-manager.service':
           ensure => link,
-          target => '/lib/systemd/system/gdm.service',
+          target => '/lib/systemd/system/gdm3.service',
           notify => Exec['/bin/systemctl daemon-reload'],
           ;
       }
