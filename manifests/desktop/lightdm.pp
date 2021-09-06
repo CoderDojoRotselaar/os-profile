@@ -29,13 +29,13 @@ class profile::desktop::lightdm {
 
   $lightdm_session_config = {
     User         => {
-      Session       => $profile::desktop::session_name,
-      XSession      => $profile::desktop::xsession_name,
-      Icon          => "/home/${coderdojo_user}/.face",
-      SystemAccount => false,
+      'Session'       => $profile::desktop::session_name,
+      'XSession'      => $profile::desktop::xsession_name,
+      'Icon'          => "/home/${coderdojo_user}/.face",
+      'SystemAccount' => false,
     },
     InputSource0 => {
-      xkb=>$profile::keyboard::layout,
+      'xkb' => profile::keyboard::layout,
     }
   }
 
