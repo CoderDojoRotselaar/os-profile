@@ -3,10 +3,11 @@ class profile::codium (
 ) {
   $coderdojo_home = $::profile::user::coderdojo_home
 
-  case $facts['os']['family'] {
-    'RedHat': { include profile::codium::redhat  }
-    'Debian': { include profile::codium::debian  }
-    default:  { } # do nothing
+  include ::snapd
+
+  package { 'codium':
+    ensure   => installed,
+    provider => 'snap',
   }
 
   file { "${coderdojo_home}/Bureaublad/codium.desktop":
