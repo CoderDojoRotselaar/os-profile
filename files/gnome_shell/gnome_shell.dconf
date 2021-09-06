@@ -9,6 +9,9 @@ actions=[(0, true, true, 'toggleOverview', ''), (0, false, false, 'toggleOvervie
 [org/gnome/desktop/wm/preferences]
 button-layout=':minimize,maximize,close'
 
+[org/gnome/desktop/background]
+show-desktop-icons=true
+
 [org/gnome/shell/extensions/dash-to-dock]
 apply-custom-theme=false
 background-color='#000000'
