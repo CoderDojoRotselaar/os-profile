@@ -16,17 +16,31 @@ class profile::desktop (
     include $sanitized_env_class
     case $environment {
       'lubuntu-desktop': {
-        service { 'lxdm':
-          ensure  => running,
-          enable  => true,
-          require => Package['lubuntu-desktop'],
+        file {
+          "${::profile::user::coderdojo_home}/.xsession":
+            ensure  => file,
+            content => '/usr/bin/startlxqt',
+            owner   => $::profile::user::coderdojo_user,
+            group   => $::profile::user::coderdojo_group,
+            ;
+          '/etc/X11/default-display-manager':
+            ensure  => file,
+            content => '/usr/sbin/lightdm',
+            ;
         }
       }
       'gnome-shell': {
-        service { 'gdm':
-          ensure  => running,
-          enable  => true,
-          require => Package['gnome-shell'],
+        file {
+          "${::profile::user::coderdojo_home}/.xsession":
+            ensure  => file,
+            content => '/usr/lib/gdm3/gdm-x-session',
+            owner   => $::profile::user::coderdojo_user,
+            group   => $::profile::user::coderdojo_group,
+            ;
+          '/etc/X11/default-display-manager':
+            ensure  => file,
+            content => '/usr/sbin/gdm3',
+            ;
         }
       }
       default: {
