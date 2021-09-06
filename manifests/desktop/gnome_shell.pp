@@ -20,6 +20,9 @@ class profile::desktop::gnome_shell {
       ensure => file,
       source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',
       ;
+    '/etc/dconf/db/local.d/':
+      ensure => directory,
+      ;
     '/etc/dconf/db/local.d/01-coderdojo':
       ensure  => present,
       content => file('profile/gnome_shell/01-coderdojo.dconf'),
