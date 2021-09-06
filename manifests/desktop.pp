@@ -29,6 +29,11 @@ class profile::desktop (
           ensure  => file,
           content => "/usr/sbin/lightdm\n",
           ;
+        '/etc/systemd/system/display-manager.service':
+          ensure => link,
+          target => '/lib/systemd/system/lightdm.service',
+          notify => Exec['/bin/systemctl daemon-reload'],
+          ;
       }
     }
     'gnome-shell': {
@@ -42,6 +47,11 @@ class profile::desktop (
         '/etc/X11/default-display-manager':
           ensure  => file,
           content => "/usr/sbin/gdm3\n",
+          ;
+        '/etc/systemd/system/display-manager.service':
+          ensure => link,
+          target => '/lib/systemd/system/gdm.service',
+          notify => Exec['/bin/systemctl daemon-reload'],
           ;
       }
     }
