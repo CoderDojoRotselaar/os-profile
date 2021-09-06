@@ -8,6 +8,7 @@ class profile::desktop::lubuntu_desktop (
   ]:
     ensure => installed,
     before => User[$::profile::user::coderdojo_user],
+    notify => Exec["set-desktop-lxqt"],
   }
 
   $unquoted_ini = {
@@ -73,5 +74,10 @@ class profile::desktop::lubuntu_desktop (
     user        => $::profile::user::coderdojo_user,
     unless      => "/usr/bin/wmctrl -d | /usr/bin/wc -l | grep -Fx ${desktops}",
     require     => Package['wmctrl'],
+  }
+
+  exec { 'set-desktop-lxqt':
+    command     => '/usr/bin/update-alternatives --set x-session-manager /usr/bin/startlxqt',
+    refreshonly => true
   }
 }
