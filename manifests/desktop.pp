@@ -18,13 +18,10 @@ class profile::desktop (
 
   case $environment {
     'lubuntu-desktop': {
+      $session_name = 'lxqt'
+      $xsession_name = 'LXDE'
+
       file {
-        "${::profile::user::coderdojo_home}/.dmrc":
-          ensure  => file,
-          content => "[Desktop]\nSession=LXDE\n",
-          owner   => $::profile::user::coderdojo_user,
-          group   => $::profile::user::coderdojo_group,
-          ;
         '/etc/X11/default-display-manager':
           ensure  => file,
           content => "/usr/sbin/lightdm\n",
@@ -42,12 +39,6 @@ class profile::desktop (
     }
     'gnome-shell': {
       file {
-        "${::profile::user::coderdojo_home}/.xsession":
-          ensure  => file,
-          content => "/usr/lib/gdm3/gdm-x-session\n",
-          owner   => $::profile::user::coderdojo_user,
-          group   => $::profile::user::coderdojo_group,
-          ;
         '/etc/X11/default-display-manager':
           ensure  => file,
           content => "/usr/sbin/gdm3\n",
