@@ -1,4 +1,4 @@
-[/]
+[com/gexperts/Tilix]
 app-title='${title}'
 copy-on-select=true
 new-instance-mode='split-right'
@@ -11,7 +11,7 @@ theme-variant='dark'
 window-save-state=true
 window-state=43908
 
-[keybindings]
+[com/gexperts/Tilix/keybindings]
 session-add-auto='<Shift><Alt>a'
 session-add-down='<Primary>greater'
 session-add-right='<Primary>less'
@@ -31,7 +31,7 @@ win-switch-to-session-7='<Alt><Super>KP_7'
 win-switch-to-session-8='<Alt><Super>KP_8'
 win-switch-to-session-9='<Alt><Super>KP_9'
 
-[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+[com/gexperts/Tilix/profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
 background-color='#000000001010'
 background-transparency-percent=5
 badge-color='#AC7EA8'
