@@ -1,7 +1,8 @@
 class profile::hostname (
   Hash[String, String] $lookup = {},
 ) {
-  $my_hostname = pick($lookup[$::uuid], 'coderdojo')
+  $my_uuid = upcase($::uuid)
+  $my_hostname = pick($lookup[$my_uuid], 'coderdojo')
 
   if $::hostname != $my_hostname {
     exec { "Changing my hostname from '${::hostname}' to '${my_hostname}'":
