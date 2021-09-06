@@ -8,7 +8,7 @@ class profile::user (
   include ::sudo
 
   $groups = $facts['os']['family'] ? {
-    'Debian' => ['adm', 'cdrom', 'sudo', 'dip', 'plugdev', 'lpadmin', 'sambashare'],
+    'Debian' => ['adm', 'cdrom', 'sudo', 'dip', 'plugdev', 'lpadmin'],
     'RedHat' => ['wheel'],
     default  => [],
   }
