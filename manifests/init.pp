@@ -12,6 +12,7 @@ class profile {
   include ::profile::user
   include ::profile::desktop
   include ::profile::scratux
+  include ::profile::tilix
   include ::profile::codium
   include ::profile::firefox
   include ::profile::chromium
