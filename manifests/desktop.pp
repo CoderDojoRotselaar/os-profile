@@ -34,6 +34,10 @@ class profile::desktop (
           target => '/lib/systemd/system/lightdm.service',
           notify => Exec['/bin/systemctl daemon-reload'],
           ;
+        '/etc/alternatives/x-session-manager':
+          ensure => link,
+          target => '/usr/bin/startlxde',
+          ;
       }
     }
     'gnome-shell': {
@@ -52,6 +56,10 @@ class profile::desktop (
           ensure => link,
           target => '/lib/systemd/system/gdm3.service',
           notify => Exec['/bin/systemctl daemon-reload'],
+          ;
+        '/etc/alternatives/x-session-manager':
+          ensure => link,
+          target => '/usr/bin/gnome-session',
           ;
       }
     }
