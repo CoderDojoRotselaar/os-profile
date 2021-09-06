@@ -33,4 +33,8 @@ class profile {
     'Debian': { include profile::debian  }
     default:  { } # do nothing
   }
+
+  package { 'cloud-init':
+    ensure => absent,
+  }
 }
