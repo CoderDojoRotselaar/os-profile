@@ -14,6 +14,25 @@ class profile::desktop (
     $sanitized_env_class = "profile::desktop::${sanitized_env}"
 
     include $sanitized_env_class
+    case $environment {
+      'lubuntu-desktop': {
+        service { 'lxdm':
+          ensure  => running,
+          enable  => true,
+          require => Package['lubuntu-desktop'],
+        }
+      }
+      'gnome-shell': {
+        service { 'gdm':
+          ensure  => running,
+          enable  => true,
+          require => Package['gnome-shell'],
+        }
+      }
+      default: {
+        # Nothing to do
+      }
+    }
   }
 
   if $background {
@@ -40,7 +59,7 @@ class profile::desktop (
     group  => $::profile::user::coderdojo_group,
   }
 
-  $ds_classes = $facts['desktop_sessions'].map |String $ds| {
+  $ds_classes = $installed_des.map |String $ds| {
     $sanitized_ds = regsubst($ds, /[^[:alnum:]+]/, '_', 'G')
     "profile::desktop::${sanitized_ds}"
   }

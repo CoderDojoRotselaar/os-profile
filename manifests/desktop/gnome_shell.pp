@@ -4,7 +4,6 @@ class profile::desktop::gnome_shell {
   package { 'gnome-shell':
     ensure => installed,
     before => User[$::profile::user::coderdojo_user],
-    notify => Exec['set-desktop-gnome-session'],
   }
 
 
@@ -49,10 +48,5 @@ class profile::desktop::gnome_shell {
       require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
       notify  => Exec['dconf update'],
     }
-  }
-
-  exec { 'set-desktop-gnome-session':
-    command     => '/usr/bin/update-alternatives --set x-session-manager /usr/bin/gnome-session',
-    refreshonly => true
   }
 }
