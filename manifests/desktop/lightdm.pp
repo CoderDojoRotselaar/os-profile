@@ -28,13 +28,13 @@ class profile::desktop::lightdm {
   create_ini_settings($lightdm_config, $lightdm_defaults)
 
   $lightdm_session_config = {
-    User         => {
+    'User'         => {
       'Session'       => $profile::desktop::session_name,
       'XSession'      => $profile::desktop::xsession_name,
       'Icon'          => "/home/${coderdojo_user}/.face",
       'SystemAccount' => false,
     },
-    InputSource0 => {
+    'InputSource0' => {
       'xkb' => profile::keyboard::layout,
     }
   }
