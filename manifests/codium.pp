@@ -21,8 +21,8 @@ class profile::codium (
 
   $extensions.each |$ext| {
     exec { "Install codium extension '${ext}'":
-      command => "/usr/bin/codium --install-extension ${ext}",
-      unless  => "/usr/bin/codium --list-extensions | grep -Fx ${ext}",
+      command => "/snap/bin/codium --install-extension ${ext}",
+      unless  => "/snap/bin/codium --list-extensions | grep -Fx ${ext}",
       user    => $::profile::user::coderdojo_user,
       require => Package['codium'],
     }
