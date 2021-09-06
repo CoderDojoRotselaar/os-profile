@@ -27,26 +27,6 @@ class profile::desktop::lightdm {
 
   create_ini_settings($lightdm_config, $lightdm_defaults)
 
-  $lightdm_session_config = {
-    'User'         => {
-      'Session'       => $profile::desktop::session_name,
-      'XSession'      => $profile::desktop::xsession_name,
-      'Icon'          => "/home/${coderdojo_user}/.face",
-      'SystemAccount' => false,
-    },
-    'InputSource0' => {
-      'xkb' => $profile::keyboard::layout,
-    }
-  }
-
-  $lightdm_session_defaults = {
-    path              => '/var/lib/AccountsService/users/coderdojo',
-    key_val_separator => '=',
-    require           => Package['lightdm'],
-  }
-
-  create_ini_settings($lightdm_session_config, $lightdm_session_defaults)
-
   file { "${::profile::user::coderdojo_home}/.face":
     ensure => file,
     source => '/var/lib/puppet-deployment/assets/coderdojo_logo.png',

@@ -38,6 +38,9 @@ class profile::desktop (
       }
     }
     'gnome-shell': {
+      $session_name = 'lxqt'
+      $xsession_name = 'ubuntu'
+
       file {
         '/etc/X11/default-display-manager':
           ensure  => file,
@@ -55,9 +58,31 @@ class profile::desktop (
       }
     }
     default: {
-      # Nothing to do
+      $session_name = 'lxqt'
+      $xsession_name = 'ubuntu'
     }
   }
+
+  $lightdm_session_config = {
+    'User'         => {
+      'Session'       => $session_name,
+      'XSession'      => $xsession_name,
+      'Icon'          => "${::profile::user::coderdojo_home}/.face",
+      'SystemAccount' => false,
+    },
+    'InputSource0' => {
+      'xkb' => $profile::keyboard::layout,
+    }
+  }
+
+  $lightdm_session_defaults = {
+    path              => "/var/lib/AccountsService/users/${::profile::user::coderdojo_user}",
+    key_val_separator => '=',
+    require           => Package['lightdm'],
+  }
+
+  create_ini_settings($lightdm_session_config, $lightdm_session_defaults)
+
 
   if $background {
     file {
