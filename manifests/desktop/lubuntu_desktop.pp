@@ -8,7 +8,7 @@ class profile::desktop::lubuntu_desktop (
   ]:
     ensure => installed,
     before => User[$::profile::user::coderdojo_user],
-    notify => Exec["set-desktop-lxqt"],
+    notify => Exec['set-desktop-lxqt'],
   }
 
   $unquoted_ini = {
