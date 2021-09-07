@@ -96,16 +96,37 @@ class profile::desktop (
         ensure => file,
         source => "/var/lib/puppet-deployment/assets/${background}",
         ;
+      '/etc/dconf/db/local.d/10-gnome_shell':
+        ensure  => present,
+        content => file('profile/gnome_shell/gnome_shell.dconf'),
+        require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
+        notify  => Exec['dconf update'],
+        ;
     }
   }
 
-  file { [
-    "${::profile::user::coderdojo_home}/.config",
-    "${::profile::user::coderdojo_home}/Bureaublad"
-  ]:
-    ensure => directory,
-    owner  => $::profile::user::coderdojo_user,
-    group  => $::profile::user::coderdojo_group,
+  file {
+    [
+      "${::profile::user::coderdojo_home}/.config",
+      "${::profile::user::coderdojo_home}/Bureaublad"
+    ]:
+      ensure => directory,
+      owner  => $::profile::user::coderdojo_user,
+      group  => $::profile::user::coderdojo_group,
+      ;
+    '/etc/dconf/db/local.d/':
+      ensure => directory,
+      ;
+    '/etc/dconf/db/local.d/01-coderdojo':
+      ensure  => present,
+      content => file('profile/gnome_shell/01-coderdojo.dconf'),
+      require => File['/usr/share/backgrounds/coderdojo/coderdojo_background.png'],
+      notify  => Exec['dconf update'],
+      ;
+    '/etc/dconf/profile/user':
+      ensure  => present,
+      content => file('profile/gnome_shell/user.conf'),
+      ;
   }
 
   $ds_classes = $installed_des.map |String $ds| {
