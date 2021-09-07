@@ -19,7 +19,7 @@ class profile::desktop (
   case $environment {
     'lubuntu-desktop': {
       $session_name = 'lxqt'
-      $xsession_name = 'LXDE'
+      $xsession_name = 'Lubuntu'
 
       file {
         '/etc/X11/default-display-manager':
