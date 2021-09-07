@@ -5,6 +5,15 @@ class profile::codium (
 
   include ::snapd
 
+  case $facts['os']['family'] {
+    'Debian': {
+      file { '/etc/apt/sources.list.d/codium.list':
+        ensure => absent,
+      }
+    }
+    default:  { } # do nothing
+  }
+
   package { 'codium':
     ensure   => installed,
     provider => 'snap',
