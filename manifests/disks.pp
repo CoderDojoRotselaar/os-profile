@@ -9,7 +9,7 @@ class profile::disks (
         physical_volumes => $facts['lvm_pv_0'],
         logical_volumes  => {
           'root'   => {
-            'size'            => '10G',
+            'size'            => '15G',
             'size_is_minsize' => true,
             'mountpath'       => '/',
           },
