@@ -3,16 +3,13 @@ class profile::chromium (
 ) {
   $coderdojo_home = $::profile::user::coderdojo_home
 
-  include ::snapd
-
   package { 'chromium':
     ensure   => installed,
-    provider => 'snap',
   }
 
   file { "${coderdojo_home}/Bureaublad/chromium.desktop":
     ensure  => file,
-    source  => '/var/lib/snapd/desktop/applications/chromium_chromium.desktop',
+    source  => '/usr/share/applications/chromium-browser.desktop',
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
     mode    => '0755',

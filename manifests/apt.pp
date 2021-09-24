@@ -17,4 +17,13 @@ class profile::apt {
       content => '',
     }
   }
+
+  apt::source { 'coderdojo':
+    ensure         => present,
+    tag            => 'early',
+    location       => 'https://debrepo.dwarfy.be',
+    allow_unsigned => true,
+    repos          => 'binary/',
+    release        => '',
+  }
 }
