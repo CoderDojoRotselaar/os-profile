@@ -18,6 +18,13 @@ class profile::apt {
     }
   }
 
+  apt::conf { 'curtin-aptproxy':
+    ensure   => absent,
+    priority => 90,
+  }
+  # Remove the proxy configuration after installing all packages (to maximize the proxy usage)
+  Package <| |> -> Apt::Conf['curtin-aptproxy']
+
   apt::source { 'coderdojo':
     ensure         => present,
     tag            => 'early',
