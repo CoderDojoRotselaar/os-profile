@@ -32,7 +32,9 @@ class profile::disks (
   }
 
   lvm::logical_volume { 'tmp':
-    ensure => absent,
+    ensure       => absent,
+    volume_group => $rootvg,
+    mountpath    => '/path/to/nowhere/tmp',
   }
 
   mount { '/tmp':
