@@ -44,4 +44,11 @@ class profile::netplan {
       refreshonly => true,
     }
   }
+
+  cron { 'restart network after boot':
+    ensure  => present,
+    command => '( /usr/bin/killall /sbin/wpa_supplicant && /usr/bin/systemctl restart NetworkManager ) &>/tmp/fix-network',
+    user    => 'root',
+    special => 'reboot',
+  }
 }

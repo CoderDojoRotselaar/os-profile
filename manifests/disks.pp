@@ -13,10 +13,6 @@ class profile::disks (
             'size_is_minsize' => true,
             'mountpath'       => '/',
           },
-          'tmp'    => {
-            'size'            => '2G',
-            'size_is_minsize' => true,
-          },
           'var'    => {
             'size'            => '10G',
             'size_is_minsize' => true,
@@ -33,6 +29,13 @@ class profile::disks (
         },
       },
     },
+  }
+
+  mount { '/tmp':
+    ensure  => present,
+    fstype  => 'tmpfs',
+    device  => 'tmpfs',
+    options => 'rw,noatime,nosuid,nodev',
   }
 
   Class['lvm'] -> Package <| |>
