@@ -1,4 +1,5 @@
 class profile {
+  include ::profile::grub
   include ::profile::disks
   include ::profile::hostname
   include ::profile::ssh
@@ -30,9 +31,9 @@ class profile {
   include ::profile::info
 
   case $facts['os']['family'] {
-    'RedHat': { include profile::redhat  }
-    'Debian': { include profile::debian  }
-    default:  { } # do nothing
+    'RedHat': { include profile::redhat }
+    'Debian': { include profile::debian }
+    default:  {} # do nothing
   }
 
   package { 'cloud-init':
