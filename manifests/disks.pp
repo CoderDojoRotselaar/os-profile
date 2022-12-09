@@ -31,6 +31,10 @@ class profile::disks (
     },
   }
 
+  lvm::logical_volume { 'tmp':
+    ensure => absent,
+  }
+
   mount { '/tmp':
     ensure  => present,
     fstype  => 'tmpfs',
