@@ -10,7 +10,7 @@ class profile::scratux {
     source  => '/usr/share/applications/scratux.desktop',
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
-    mode    => '0755',
+    mode    => '0644',
     require => Package['scratux'],
   }
 }

@@ -12,7 +12,7 @@ class profile::codium (
     source  => '/usr/share/applications/codium.desktop',
     owner   => $::profile::user::coderdojo_user,
     group   => $::profile::user::coderdojo_group,
-    mode    => '0755',
+    mode    => '0644',
     require => Package['codium'],
   }
 
