@@ -68,6 +68,13 @@ class profile::desktop::lubuntu_desktop (
     group   => $::profile::user::coderdojo_group,
   }
 
+  file { "${::profile::user::coderdojo_home}/.config/pcmanfm-qt/lxqt/settings.conf":
+    ensure  => present,
+    content => file('profile/lxqt_settings.conf'),
+    owner   => $::profile::user::coderdojo_user,
+    group   => $::profile::user::coderdojo_group,
+  }
+
   exec { 'Restart lxpanel':
     command     => '/usr/bin/lxpanelctl restart',
     user        => $::profile::user::coderdojo_user,
