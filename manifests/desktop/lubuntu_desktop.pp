@@ -3,9 +3,7 @@ class profile::desktop::lubuntu_desktop (
 ) {
   include ::profile::desktop::lightdm
 
-  package { [
-    'wmctrl', 'lubuntu-desktop',
-  ]:
+  package { 'lubuntu-desktop':
     ensure => installed,
     before => User[$::profile::user::coderdojo_user],
   }
@@ -47,11 +45,10 @@ class profile::desktop::lubuntu_desktop (
     group   => $::profile::user::coderdojo_group,
   }
 
-  exec { "Set number of desktops to ${desktops}":
-    environment => 'DISPLAY=:0',
-    command     => "/usr/bin/wmctrl -n ${desktops}",
-    user        => $::profile::user::coderdojo_user,
-    unless      => "/usr/bin/wmctrl -d | /usr/bin/wc -l | grep -Fx ${desktops}",
-    require     => Package['wmctrl'],
+  file { "${::profile::user::coderdojo_home}/.config/openbox/lxqt-rc.xml":
+    ensure  => present,
+    content => file('profile/lubuntu_desktop/lxqt-rc.xml'),
+    owner   => $::profile::user::coderdojo_user,
+    group   => $::profile::user::coderdojo_group,
   }
 }
