@@ -18,7 +18,7 @@ class profile::firefox (
     require => Package['firefox'],
   }
 
-  exec { 'make executable trusted':
+  exec { "mark '${desktop_file}' trusted":
     command     => "/usr/bin/sudo -u coderdojo -g coderdojo /usr/bin/dbus-launch /usr/bin/gio set '${desktop_file}' 'metadata::trusted' true",
     refreshonly => true,
     require     => File[$desktop_file],
