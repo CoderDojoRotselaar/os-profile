@@ -19,7 +19,7 @@ class profile::codium (
   }
 
   exec { 'make executable trusted':
-    command     => "/usr/bin/sudo -u coderdojo -g coderdojo /usr/bin/dbus-launch /usr/bin/gio set '${desktop_file}' 'metadata::trusted' true"g
+    command     => "/usr/bin/sudo -u coderdojo -g coderdojo /usr/bin/dbus-launch /usr/bin/gio set '${desktop_file}' 'metadata::trusted' true",
     refreshonly => true,
     require     => File[$desktop_file],
   }
