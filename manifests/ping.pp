@@ -4,9 +4,10 @@ class profile::ping (
   if $target {
     $hostname = $facts['hostname']
     $ip = $facts['networking']['ip']
+    $uuid = $facts['uuid']
 
     exec { 'ping puppet run':
-      command => "/usr/bin/curl '${target}?action=puppet&hostname=${hostname}&ip=${ip}'",
+      command => "/usr/bin/curl '${target}?action=puppet&uuid=${uuid}&hostname=${hostname}&ip=${ip}'",
     }
   }
 }
