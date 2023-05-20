@@ -15,15 +15,10 @@ class profile::wifi {
           password => Sensitive($config['password']),
         }
       } else {
-        $path = "network.wifis.${wifi}.access-points.'${net}'.auth"
+        $path = "network.wifis.${wifi}.access-points.'${net}'"
         exec { "Configure WiFi for '${net}'.password":
-          command => "/usr/sbin/netplan set ${path}.password='${config['password']}'",
-          unless  => "/usr/sbin/netplan get ${path}.password | grep -qFx '\"${config['password']}\"'",
-          notify  => Exec['apply netplan'],
-        }
-        exec { "Configure WiFi for '${net}'.key-management":
-          command => "/usr/sbin/netplan set ${path}.key-management='psk'",
-          unless  => "/usr/sbin/netplan get ${path}.key-management | grep -qFx '\"psk\"'",
+          command => "/usr/sbin/netplan set ${path}='${config['password']}'",
+          unless  => "/usr/sbin/netplan get ${path}.auth.password | grep -qFx '\"${config['password']}\"'",
           notify  => Exec['apply netplan'],
         }
       }
