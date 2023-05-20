@@ -45,8 +45,14 @@ class profile::netplan {
     }
   }
 
+  if ($facts['os']['release']['major'] == '20.04') {
+    $restart_wpa = 'present'
+  } else {
+    $restart_wpa = 'absent'
+  }
+
   cron { 'restart network after boot':
-    ensure  => present,
+    ensure  => $restart_wpa,
     command => '( /usr/bin/killall /sbin/wpa_supplicant && /usr/bin/systemctl restart NetworkManager ) &>/tmp/fix-network',
     user    => 'root',
     special => 'reboot',
