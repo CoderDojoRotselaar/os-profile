@@ -3,8 +3,8 @@ class profile::wifi {
   $wifi = $facts['wifi_device']
   if ($wifi) {
     exec { 'Configure wifi interfaces':
-      command => "/usr/sbin/netplan set network.ethernets.${wifi}.dhcp4=true",
-      unless  => "/usr/sbin/netplan get network.ethernets.${wifi}.dhcp4 | grep -qFx 'true'",
+      command => "/usr/sbin/netplan set network.wifis.${wifi}.dhcp4=true",
+      unless  => "/usr/sbin/netplan get network.wifis.${wifi}.dhcp4 | grep -qFx 'true'",
       notify  => Exec['apply netplan'],
     }
 
