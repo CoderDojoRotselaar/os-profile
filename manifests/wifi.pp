@@ -17,7 +17,7 @@ class profile::wifi {
       } else {
         $path = "network.wifis.${wifi}.access-points.'${net}'"
         exec { "Configure WiFi for '${net}'.password":
-          command => "/usr/sbin/netplan set ${path}='${config['password']}'",
+          command => "/usr/sbin/netplan set ${path}.password='${config['password']}'",
           unless  => "/usr/sbin/netplan get ${path}.auth.password | grep -qFx '\"${config['password']}\"'",
           notify  => Exec['apply netplan'],
         }
