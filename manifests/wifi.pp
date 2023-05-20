@@ -16,12 +16,12 @@ class profile::wifi {
         }
       } else {
         $path = "network.wifis.${wifi}.access-points.'${net}'.auth"
-        exec { "Configure WiFi for '${net}'":
+        exec { "Configure WiFi for '${net}'.password":
           command => "/usr/sbin/netplan set ${path}.password='${config['password']}'",
           unless  => "/usr/sbin/netplan get ${path}.password | grep -qFx '\"${config['password']}\"'",
           notify  => Exec['apply netplan'],
         }
-        exec { "Configure WiFi for '${net}'":
+        exec { "Configure WiFi for '${net}'.key-management":
           command => "/usr/sbin/netplan set ${path}.key-management='psk'",
           unless  => "/usr/sbin/netplan get ${path}.key-management | grep -qFx '\"psk\"'",
           notify  => Exec['apply netplan'],
