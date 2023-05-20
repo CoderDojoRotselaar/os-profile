@@ -1,46 +1,29 @@
 class profile::netplan {
-  $interfaces = $facts['networking']['interfaces']
+  $interfaces = $facts['networking']['interfaces'].keys
 
-  $ethernet_configs = $interfaces.reduce({}) |$collection, $if| {
-    $ifname = $if[0]
-    $ifconfig = $if[1]
-
+  $interfaces.each |$ifname| {
     if $ifname =~ /^enp/ {
-      $result = $collection.merge(
-        {
-          $ifname => {
-            'dhcp4'    => 'yes',
-            'optional' => true,
-          },
-        }
-      )
-    } else {
-      $result = $collection
-    }
-    $result
-  }
-
-  $settings = {
-    'header' => '# THIS FILE IS CONTROLLED BY PUPPET',
-  }
-  $config = {
-    'network' => {
-      'version'   => 2,
-      'renderer'   => 'networkd',
-      'ethernets' => $ethernet_configs,
+      exec { "Configure wired interface '${ifname}'.optional":
+        command => "/usr/sbin/netplan set network.ethernets.${ifname}.optional=true",
+        unless  => "/usr/sbin/netplan get network.ethernets.${ifname}.optional | grep -qFx 'true'",
+        notify  => Exec['apply netplan'],
+      }
+      exec { "Configure wired interface '${ifname}'.dhcp4":
+        command => "/usr/sbin/netplan set network.ethernets.${ifname}.dhcp4=true",
+        unless  => "/usr/sbin/netplan get network.ethernets.${ifname}.dhcp4 | grep -qFx 'true'",
+        notify  => Exec['apply netplan'],
+      }
     }
   }
 
-  file { '/etc/netplan/01-netcfg.yaml':
-    ensure  => file,
-    content => hash2yaml($config, $settings),
-    require => Class[profile::networks],
-  }
-
-  if ! $facts['deploy'] {
+  if $facts['deploy'] {
+    exec { 'apply netplan':
+      command     => '/bin/true',
+      refreshonly => true,
+    }
+  } else {
     exec { 'apply netplan':
       command     => '/usr/sbin/netplan apply',
-      subscribe   => File['/etc/netplan/01-netcfg.yaml'],
       refreshonly => true,
     }
   }
